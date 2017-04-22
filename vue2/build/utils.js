@@ -78,10 +78,9 @@ exports.styleLoaders = function (options) {
 exports.getMultiEntry = function (globPath) {
   var entries = {},
     basename, tmp, pathname;
-
   glob.sync(globPath).forEach(function (entry) {
     let moduleName=entry.split('./src/views/')[1].split('/')[0];
-    if(['home','tools'].indexOf(moduleName)!=-1){
+    if(['home'].indexOf(moduleName)!=-1){
       basename = path.basename(entry, path.extname(entry));
       tmp = entry.split('/').splice(-4);
       var pathsrc = tmp[0]+'/'+tmp[1];

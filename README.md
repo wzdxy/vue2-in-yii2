@@ -26,6 +26,7 @@ npm run buildfront
     CustomLog "logs/frontend-access.log" common
 </VirtualHost>
 ```
+3. This is a **unfinished project**
 -------------------
 DIRECTORY STRUCTURE
 -------------------
