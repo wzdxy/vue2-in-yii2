@@ -33,3 +33,7 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
+# vue dist files
+frontend/web/dist/
+backend/web/dist/

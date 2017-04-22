@@ -1,21 +1,32 @@
-Yii 2 Advanced Project Template
+Vue2 in Yii2
 ===============================
+1. init project
+```
+composer install
+init
+cd vue2
+npm install
+npm run buildfront
+```
+2. apache config
+```conf
+<VirtualHost *:80>	#vue2-in-yii2\backend
+    ServerAdmin webmaster@example.com
+    DocumentRoot "{YOUR PROJECT}\backend\web"
+    ServerName b.localhost
+    ErrorLog "logs/backend-error.log"
+    CustomLog "logs/backend-access.log" common
+</VirtualHost>
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
-
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
-
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
-
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
-
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-advanced/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-advanced/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
-
+<VirtualHost *:80>	#vue2-in-yii2\frontend
+    ServerAdmin webmaster@.example.com
+    DocumentRoot "{YOUR PROJECT}\frontend\web"
+    ServerName f.localhost
+    ErrorLog "logs/frontend-error.log"
+    CustomLog "logs/frontend-access.log" common
+</VirtualHost>
+```
+-------------------
 DIRECTORY STRUCTURE
 -------------------
 
@@ -52,4 +63,5 @@ frontend
     widgets/             contains frontend widgets
 vendor/                  contains dependent 3rd-party packages
 environments/            contains environment-based overrides
+vue2/                    vue2 project
 ```
