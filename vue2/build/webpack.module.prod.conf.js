@@ -1,23 +1,24 @@
 var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
-var config = require('../config/front')
+var config = require('../config/modules')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-
-var entries =  utils.getMultiEntry('./src/'+config.moduleName+'/**/**/*.js'); // 获得入口js文件
+var entries =  utils.getMultiEntryOfModule('./src/'+config.moduleName+'/**/**/*.js',process.argv[2]); // 获得入口js文件
 var chunks = Object.keys(entries);
-
+// console.log('front.chunks')
+// console.log(chunks)
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
+  entry:entries,
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -102,7 +103,7 @@ var webpackConfig = merge(baseWebpackConfig, {
 
   ]
 })
-
+// console.log(JSON.stringify(webpackConfig,null,'\t'))
 if (config.build.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin')
 
@@ -127,7 +128,7 @@ if (config.build.bundleAnalyzerReport) {
 }
 
 //构建生成多页面的HtmlWebpackPlugin配置，主要是循环生成
-var pages =  utils.getMultiEntry('./src/'+config.moduleName+'/**/**/*.html');
+var pages =  utils.getMultiEntryOfModule('./src/'+config.moduleName+'/**/**/*.html',process.argv[2]);
 for (var pathname in pages) {
   var conf = {
     filename: pathname + '.html',

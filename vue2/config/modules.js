@@ -1,6 +1,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-
+var modules=require('../build/modules.target.conf.js')
+if(!process.argv[2])return console.log('Need A Argument As Module Name !!')
+var targetModule=modules.getModuleTarget(process.argv[2])
 module.exports = {
 	
   //网站模块名，例如 http://192.168.0.216:8089/module/app/initlayer.html 中的 
@@ -9,10 +11,10 @@ module.exports = {
   
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../../frontend/web/dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../../frontend/web/dist'),
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '../../',
+    index: targetModule.index,
+    assetsRoot: targetModule.assetsRoot,
+    assetsSubDirectory: targetModule.assetsPublicPath,
+    assetsPublicPath: targetModule.assetsPublicPath,
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.

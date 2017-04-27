@@ -5,13 +5,15 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var entries =  utils.getMultiEntry('./src/'+config.moduleName+'/**/**/*.js'); // 获得入口js文件
 
 // add hot-reload related code to entry chunks
-Object.keys(baseWebpackConfig.entry).forEach(function (name) {
-  baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
+Object.keys(entries).forEach(function (name) {
+  entries[name] = ['./build/dev-client'].concat(entries[name])
 })
 
 module.exports = merge(baseWebpackConfig, {
+  entry:entries,  
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },

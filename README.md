@@ -1,15 +1,21 @@
 Vue2 in Yii2
 ===============================
 1. init project
-```
+```bash
 composer install
 init
 cd vue2
 npm install
-npm run buildfront
+
+#for build to yii, dist to vue2-in-yii2\backend\web\dist (or frontend\web\dist)
+npm run build-module home
+npm run build-module admin
+
+#for debug, preview at localhost:8091/views/home.html (or views/admin.html)
+npm run dev 
 ```
 2. apache config
-```conf
+```ini
 <VirtualHost *:80>	#vue2-in-yii2\backend
     ServerAdmin webmaster@example.com
     DocumentRoot "{YOUR PROJECT}\backend\web"
