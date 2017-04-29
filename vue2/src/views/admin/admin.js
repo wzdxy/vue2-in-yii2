@@ -10,22 +10,35 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import router from  "@/router/admin"
+import Footer from  "@/components/adminFooter.vue"
+import Test from "@/pages/Test.vue"
+import Head from "@/components/adminHead.vue"
+import AdminHome from "@/pages/AdminHome.vue"
+import AdminUser from "@/pages/AdminUser.vue"
+import AdminArticle from "@/pages/AdminArticle.vue"
+import PersonalCenter from "@/pages/PersonalCenter.vue"
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
+import 'muse-ui/dist/theme-light.min.css'
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.component('component-example',{
-  template:'<div v-bind:style="style">This is A custom component!<br>{{msg}}</div>',
-  data:function(){
-    return{msg:'我是一个组件，我来自main.js中的定义',style:{border:"1px solid",margin:"2px"}}
-  }
-})
-
+Vue.component('Test',Test);
+Vue.component('admin-head',Head);
+Vue.component('admin-footer',Footer);
+Vue.component('AdminHome',AdminHome);
+Vue.component('AdminUser',AdminUser);
+Vue.component('AdminArticle',AdminArticle);
+Vue.component('UserCenter',PersonalCenter);
+Vue.use(MuseUI);
 
 
 /* eslint-disable no-new */
 window.vm=new Vue({
   el: '#app',
+  router,
   template: '<App/>',
   components: { App }
-})
+});

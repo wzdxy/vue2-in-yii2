@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <h2>ADMIN module</h2>
-    <footer>footer</footer>
+    <admin-head></admin-head>
+    <router-view></router-view>
+    <!--<admin-footer></admin-footer>-->
   </div>
 </template>
 
@@ -23,6 +24,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+  body{
+    padding: 0;
+    margin: 0;
+  }
 </style>

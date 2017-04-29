@@ -7,18 +7,18 @@ init
 cd vue2
 npm install
 
-#for build to yii, dist to vue2-in-yii2\backend\web\dist (or frontend\web\dist)
-npm run build-module home
+#for build to yii, will distribute to vue2-in-yii2\backend\web\dist (or frontend\web\dist)
 npm run build-module admin
+npm run build-module home
 
-#for debug, preview at localhost:8091/views/home.html (or views/admin.html)
+#for debug, preview at localhost:8091/views/admin.html (or views/home.html)
 npm run dev 
 ```
 2. apache config
 ```ini
 <VirtualHost *:80>	#vue2-in-yii2\backend
     ServerAdmin webmaster@example.com
-    DocumentRoot "{YOUR PROJECT}\backend\web"
+    DocumentRoot "{YOUR PROJECT DIR}\backend\web"
     ServerName b.localhost
     ErrorLog "logs/backend-error.log"
     CustomLog "logs/backend-access.log" common
@@ -26,16 +26,28 @@ npm run dev
 
 <VirtualHost *:80>	#vue2-in-yii2\frontend
     ServerAdmin webmaster@.example.com
-    DocumentRoot "{YOUR PROJECT}\frontend\web"
+    DocumentRoot "{YOUR PROJECT DIR}\frontend\web"
     ServerName f.localhost
     ErrorLog "logs/frontend-error.log"
     CustomLog "logs/frontend-access.log" common
 </VirtualHost>
 ```
-3. This is a **unfinished project**
+
+3. PROJECT STRUCTURE
+    
+    [Click To View A Topo](http://naotu.baidu.com/file/91dcd0a543fae20cf915f0ba0bb3ea7a?token=c61c047bd874641f)
+
+4. **This is an unfinished project**
+
+
+
 -------------------
 DIRECTORY STRUCTURE
 -------------------
+
+
+
+
 
 ```
 common

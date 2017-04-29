@@ -16,7 +16,7 @@ use frontend\models\ContactForm;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class DefaultController extends Controller
 {
     public $layout=false;
     /**
@@ -49,7 +49,6 @@ class SiteController extends Controller
             ],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -73,7 +72,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('..\..\web\dist\views\home.html');
+        echo "heeh";
+//        return $this->render('..\..\web\dist\views\home.html');
     }
 
     /**

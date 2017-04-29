@@ -12,6 +12,7 @@ use common\models\LoginForm;
  */
 class SiteController extends Controller
 {
+    public $layout=false;
     /**
      * @inheritdoc
      */
@@ -41,6 +42,9 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action){
+        return true;
+    }
     /**
      * @inheritdoc
      */
@@ -60,6 +64,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+//        echo var_dump(Yii::$app->user->isGuest)+"<br>"+var_dump(Yii::$app->user->identity);
         return $this->render('..\..\web\dist\views\admin.html');
     }
 
