@@ -4,14 +4,7 @@ var webpack = require('webpack')
 var config = require('../config')
 
 var glob = require('glob');
-
-//chunk和entry 等参数移到具体的dev或prod配置中
-// var entries =  utils.getMultiEntry('./src/'+config.moduleName+'/**/**/*.js'); // 获得入口js文件
-// var chunks = Object.keys(entries);
-// console.log(chunks)
-
 var projectRoot = path.resolve(__dirname, '../')
-const vuxLoader = require('vux-loader')
 
 var vueLoaderConfig = require('./vue-loader.conf')
 
@@ -19,9 +12,7 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-var webpackConfig = {
-
-  // entry:entries,
+module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -82,12 +73,3 @@ var webpackConfig = {
    
   ]
 }
-
-
-
-module.exports = vuxLoader.merge(webpackConfig, {
-    options: {
-    
-  },	
-  plugins: ['vux-ui', 'progress-bar', 'duplicate-style']
-})

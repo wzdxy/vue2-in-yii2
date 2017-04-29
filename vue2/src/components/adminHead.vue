@@ -5,7 +5,7 @@
         <mu-flat-button href="#/" label="HOME" slot="left"/>
         <mu-flat-button href="#/article" label="Article" slot="left"/>
         <mu-flat-button href="#/user" label="User" slot="left"/>
-        <mu-flat-button href="#/personalcenter" label="Login" slot="right"/>
+        <mu-flat-button href="#/personalcenter" label="PersonalCenter" slot="right"/>
     </mu-appbar>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
     <div id="PersonalCenter">
         <h2>UserCenter</h2>
+        <span>{{user.id}}</span>
     </div>
 </template>
 
@@ -10,6 +11,11 @@
         data(){
             return {
                 isActive: true, hasError: true
+            }
+        },
+        computed:{
+            user(){
+                return this.$store.state.user
             }
         }
     }

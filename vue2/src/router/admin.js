@@ -8,6 +8,7 @@ import AdminHome from '@/pages/AdminHome'
 import AdminUser from '@/pages/AdminUser'
 import AdminArticle from '@/pages/AdminArticle'
 import PersonalCenter from '@/pages/PersonalCenter'
+import Login from '@/pages/Login'
 
 Vue.use(Router);
 
@@ -36,7 +37,15 @@ export default new Router({
         {
             path: '/personalcenter',
             name: 'PersonalCenter',
-            component: PersonalCenter
+            component: PersonalCenter,
+            meta:{
+                requireAuth:true
+            }
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
         }
     ]
 
