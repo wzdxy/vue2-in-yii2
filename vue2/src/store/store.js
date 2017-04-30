@@ -10,6 +10,8 @@ export default new Vuex.Store({
         user:{
             id:'admin'
         },
-        token:false
+        token:'dwadw',
+        api_host:'http://localhost:82',
+        // api_host:'',
     },
 })

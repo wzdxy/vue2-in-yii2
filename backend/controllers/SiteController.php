@@ -2,10 +2,12 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use yii\filters\Cors;
 
 /**
  * Site controller
@@ -18,28 +20,11 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
+        return ArrayHelper::merge(parent::behaviors(),
+            [
+
+            ]
+        );
     }
 
     public function beforeAction($action){
@@ -75,6 +60,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        return 'login page';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
