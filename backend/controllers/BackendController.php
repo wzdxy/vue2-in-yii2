@@ -10,15 +10,10 @@ class BackendController extends Controller
     public $layout=false;
     public $enableCsrfValidation = false;
     public function beforeAction($action){
-        $post=Yii::$app->request->post();
-//        $header=Yii::$app->request->getHeaders('authorization');
-        if(isset($header['_headers']['authorization'])){
-            $user=new User();
-            $user->id=
-            $user->validateToken();
-            $Token=$header['_headers']['authorization'];
-            $Id=User::validateToken($Token);
-
+        $token_key=Yii::$app->request->headers->get('authorization');
+        if(isset($token_key)){
+            $modal=new User();
+            return $modal->validateToken($token_key);
         }else{
             return false;
         }

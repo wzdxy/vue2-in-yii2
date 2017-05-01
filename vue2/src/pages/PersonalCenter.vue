@@ -29,8 +29,8 @@
         methods:{
             publish:function () {
                 this.$http.post('/article/publish',this.$qs.stringify({
-                        id:this.title,
-                        pw:this.content,
+                        title:this.title,
+                        content:this.content,
                     })
                 ).then(function (res) {
                     console.log(res);

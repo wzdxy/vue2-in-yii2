@@ -61,31 +61,17 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-//        return Yii::$app->user->isGuest;
-//        if (!Yii::$app->user->isGuest) {
-//            return $this->goHome();
-//        }
-        $Post=Yii::$app->request->post();
-        $user=User::findByUsername($Post['id']);
+        $post=Yii::$app->request->post();
+        $user=User::findByUsername($post['id']);
         if(isset($user)){
-            if($user->validatePassword($Post['pw'])){
-                return json_encode(['result'=>0,'token'=>$user->setToken()]);
+            if($user->validatePassword($post['pw'])){
+                if(!isset($user->token_key))$user->token_key=$user->setToken();
+                return json_encode(['result'=>0,'token'=>$user->token_key]);
             }else{
                 return json_encode(['result'=>2,'message'=>'wrong pw']);
-            };
+            }
         }else {
             return json_encode(['result'=>1,'message'=>'no user']);
-        }
-
-
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
     }
 

@@ -204,10 +204,15 @@ class User extends ActiveRecord implements IdentityInterface
         $this->save();
         return $jwt;
     }
-    public function validateToken($jwt){
+    public function validateToken($token_key){
         $key = "qwertyuiopnjibhu";
-        $decoded = (array)JWT::decode($jwt, $key, array('HS256'));
+        $decoded = (array)JWT::decode($token_key, $key, array('HS256'));
         $this->id=$decoded['id'];
-        return static::findOne(['id'=>$this->id,'token'=>$jwt]);
+        $v=$this->findOne(['id'=>$this->id,'token_key'=>$token_key]);
+        if(isset($v)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
