@@ -11,7 +11,5 @@ export default new Vuex.Store({
             id:'admin'
         },
         token:'dwadw',
-        api_host:'http://localhost:82',
-        // api_host:'',
     },
 })

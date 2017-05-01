@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import qs from 'qs'
 import App from './App'
 import store from '@/store/store'
 import MuseUI from 'muse-ui'
@@ -16,6 +17,11 @@ Vue.config.productionTip = false;
 Vue.component('admin-head',Head);
 Vue.component('admin-footer',Footer);
 
+// axios.defaults.paramsSerializer=function (params) {
+//     return qs.stringify(params,{arrayFormat: 'brackets'})
+// }
+Vue.prototype.$http=axios;
+Vue.prototype.$qs=qs;
 router.beforeEach((to,from,next)=>{
     if(to.meta.requireAuth){
         if(store.state.token){

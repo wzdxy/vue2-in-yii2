@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -60,10 +61,23 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        return 'login page';
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+//        return Yii::$app->user->isGuest;
+//        if (!Yii::$app->user->isGuest) {
+//            return $this->goHome();
+//        }
+        $Post=Yii::$app->request->post();
+        $user=User::findByUsername($Post['id']);
+        if(isset($user)){
+            if($user->validatePassword($Post['pw'])){
+                return 'true';
+            }else{
+                return 'false';
+            };
+        }else {
+            return 'No User';
         }
+
+
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+//    import axios from 'axios'
     export default {
         name: 'Login',
         data(){
@@ -31,21 +31,13 @@
 
             },
             login:function () {
-                axios.post('/site/login',{
-                    id:this.id,
-                    pw:this.pw,
+                this.$http.post('/site/login',this.$qs.stringify({
+                        id:this.id,
+                        pw:this.pw,
+                    })
+                ).then(function (res) {
+                    console.log(res);
                 })
-//                axios({
-//                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-//                    method:'post',
-//                    url:'/site/login',
-//                    data:{
-//                        id:this.id,
-//                        pw:this.pw,
-//                    }
-//                }).then(function (res) {
-//                    alert(res);
-//                })
             }
         }
     }
