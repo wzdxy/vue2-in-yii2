@@ -37,7 +37,14 @@ module.exports = {
             target: 'http://127.0.0.1:82',
             changeOrigin: true,
             pathRewrite: {
-                '^/site': '/site'
+                '^/site': '/site',
+            }
+        },
+        '/article': {
+            target: 'http://127.0.0.1:82',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/article': '/article',
             }
         }
     },

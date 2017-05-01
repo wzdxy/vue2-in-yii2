@@ -24,7 +24,8 @@ Vue.prototype.$http=axios;
 Vue.prototype.$qs=qs;
 router.beforeEach((to,from,next)=>{
     if(to.meta.requireAuth){
-        if(store.state.token){
+        // if(store.state.token){
+        if(localStorage.token_key && localStorage.token_time > Date.now()){
             next();
         }else{
             next({
@@ -39,8 +40,9 @@ router.beforeEach((to,from,next)=>{
 
 axios.interceptors.request.use(             //request 拦截器
     config=>{
-        if(store.state.token){
-            config.headers.Authorization=`token ${store.state.token}`
+        // if(store.state.token){
+        if(localStorage.token_key && localStorage.token_time > Date.now()){
+            config.headers.Authorization=localStorage.token_key;
         }
         return config;
     },

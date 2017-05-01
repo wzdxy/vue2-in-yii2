@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use Firebase\JWT\JWT;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -12,6 +13,7 @@ use yii\web\IdentityInterface;
  *
  * @property integer $id
  * @property string $username
+ * @property string $token_key
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -189,6 +191,23 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     public function setToken(){
-
+        $key = "qwertyuiopnjibhu";
+        $token = array(
+            "iss" => "http://zchi.me",
+            "aud" => "http://example.com",
+//            "iat" => 1356999524,
+//            "nbf" => 1357000000,
+            "id"=>$this->id
+        );
+        $jwt = JWT::encode($token, $key);
+        $this->token_key=$jwt;
+        $this->save();
+        return $jwt;
+    }
+    public function validateToken($jwt){
+        $key = "qwertyuiopnjibhu";
+        $decoded = (array)JWT::decode($jwt, $key, array('HS256'));
+        $this->id=$decoded['id'];
+        return static::findOne(['id'=>$this->id,'token'=>$jwt]);
     }
 }

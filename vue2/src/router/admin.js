@@ -17,7 +17,10 @@ export default new Router({
         {
             path: '/',
             name: 'AdminHome',
-            component: AdminHome
+            component: AdminHome,
+            meta:{
+                requireAuth:true
+            }
         },
         {
             path: '/test',
@@ -27,12 +30,18 @@ export default new Router({
         {
             path: '/user',
             name: 'AdminUser',
-            component: AdminUser
+            component: AdminUser,
+            meta:{
+                requireAuth:true
+            }
         },
         {
             path: '/article',
             name: 'AdminArticle',
-            component: AdminArticle
+            component: AdminArticle,
+            meta:{
+                requireAuth:true
+            }
         },
         {
             path: '/personalcenter',
