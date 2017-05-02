@@ -2,20 +2,17 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
-use yii\web\NotAcceptableHttpException;
-
+use common\models\Post;
 /**
  * Site controller
  */
 class ArticleController extends BackendController
 {
-    public $layout=false;
-    public $enableCsrfValidation = false;
     public function actionPublish(){
-//        Yii::$app->response->statusCode = 401;
-//        throw new NotAcceptableHttpException('myqx');
         $post=Yii::$app->request->post();
-        return $post['title'];
+        $body=$post['content'];
+        $title=$post['title'];
+        $modal=new Post();
+        return $modal->publish($title,$body);
     }
 }

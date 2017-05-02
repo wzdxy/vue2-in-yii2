@@ -65,7 +65,9 @@ class SiteController extends Controller
         $user=User::findByUsername($post['id']);
         if(isset($user)){
             if($user->validatePassword($post['pw'])){
-                if(!isset($user->token_key))$user->token_key=$user->setToken();
+                if(!isset($user->token_key)){
+                    $user->token_key=$user->setToken();
+                }
                 return json_encode(['result'=>0,'token'=>$user->token_key]);
             }else{
                 return json_encode(['result'=>2,'message'=>'wrong pw']);

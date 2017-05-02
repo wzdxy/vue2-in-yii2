@@ -41,7 +41,7 @@
                 ).then(function (res) {
                     if(res&&res.data.result===0){
                         window.localStorage.token_key=res.data.token;
-                        window.localStorage.token_time=new Date().getTime()+1000*60;
+                        window.localStorage.token_time=new Date().getTime()+1000*60*60;
                         let redirect=this.$route.query.redirect||'/';
                         this.$router.replace(redirect);
                     }else{
