@@ -2,7 +2,7 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Post;
+use common\models\Article;
 /**
  * Site controller
  */
@@ -10,9 +10,11 @@ class ArticleController extends BackendController
 {
     public function actionPublish(){
         $post=Yii::$app->request->post();
-        $body=$post['content'];
+        $text=$post['content'];
         $title=$post['title'];
-        $modal=new Post();
-        return $modal->publish($title,$body);
+        $modal=new Article();
+        $result=$modal->publish($title,$text);
+        return $result;
+
     }
 }

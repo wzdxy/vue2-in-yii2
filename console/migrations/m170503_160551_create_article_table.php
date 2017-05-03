@@ -3,25 +3,27 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `post`.
+ * Handles the creation of table `article`.
  */
-class m170502_141015_create_post_table extends Migration
+class m170503_160551_create_article_table extends Migration
 {
     /**
      * @inheritdoc
      */
     public function up()
     {
-        $this->createTable('post', [
+        $this->createTable('article', [
             'id' => $this->primaryKey(),
             'title' => $this->string(),
-            'body' => $this->text(),
+            'text' => $this->text(),
+            'html' => $this->text(),
             'author_id'=>$this->string(),
+            'author_name'=>$this->string(),
             'type'=>$this->string(),
             'tag'=>$this->string(),
             'status'=>$this->integer(),
-            'created_at'=>$this->integer(),
-            'updated_at'=>$this->integer(),
+            'created_at'=>$this->timestamp(),
+            'updated_at'=>$this->timestamp(),
             'url'=>$this->string()
         ]);
     }
@@ -31,6 +33,6 @@ class m170502_141015_create_post_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('post');
+        $this->dropTable('article');
     }
 }

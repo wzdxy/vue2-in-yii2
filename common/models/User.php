@@ -210,7 +210,7 @@ class User extends ActiveRecord implements IdentityInterface
         $this->id=$decoded['id'];
         $user=$this->findOne(['id'=>$this->id,'token_key'=>$token_key]);
         if(isset($user)){
-//            Yii::$app->user->login($user);
+            Yii::$app->user->login($user,0);
             return true;
         }else{
             return false;
