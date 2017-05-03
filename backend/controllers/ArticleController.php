@@ -15,6 +15,5 @@ class ArticleController extends BackendController
         $modal=new Article();
         $result=$modal->publish($title,$text);
         return $result;
-
     }
 }

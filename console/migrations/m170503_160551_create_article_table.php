@@ -17,7 +17,7 @@ class m170503_160551_create_article_table extends Migration
             'title' => $this->string(),
             'text' => $this->text(),
             'html' => $this->text(),
-            'author_id'=>$this->string(),
+            'author_id'=>$this->integer(),
             'author_name'=>$this->string(),
             'type'=>$this->string(),
             'tag'=>$this->string(),

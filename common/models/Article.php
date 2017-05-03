@@ -37,9 +37,9 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             [['text', 'html'], 'string'],
-            [['status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['title', 'author_id', 'author_name', 'type', 'tag', 'url'], 'string', 'max' => 255],
+            [['status','author_id'], 'integer'],
+            [['created_at','updated_at'], 'safe'],
+            [['title', 'author_name', 'type', 'tag', 'url'], 'string', 'max' => 255],
         ];
     }
 
@@ -73,9 +73,18 @@ class Article extends \yii\db\ActiveRecord
         $User=Yii::$app->user->getIdentity();
         $this->title=$title;
         $this->text=$text;
+        $this->html=$text;
+        $this->tag='';
+        $this->url='';
+        $this->type='';
         $this->author_id=$User->id;
         $this->author_name=$User->username;
         $this->status=0;
-        return $this->save(false);
+        //FIXME 存储到数据库里的中文全是问号
+        if($this->save()){
+            return 0;
+        }else{
+            return json_encode($this->errors);
+        }
     }
 }
