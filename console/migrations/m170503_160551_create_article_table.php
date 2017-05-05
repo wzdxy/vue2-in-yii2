@@ -12,6 +12,11 @@ class m170503_160551_create_article_table extends Migration
      */
     public function up()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('article', [
             'id' => $this->primaryKey(),
             'title' => $this->string(),
@@ -25,7 +30,7 @@ class m170503_160551_create_article_table extends Migration
             'created_at'=>$this->timestamp(),
             'updated_at'=>$this->timestamp(),
             'url'=>$this->string()
-        ]);
+        ],$tableOptions);
     }
 
     /**

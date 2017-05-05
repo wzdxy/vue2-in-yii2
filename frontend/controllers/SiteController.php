@@ -18,7 +18,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
-    public $layout=false;
+//    public $layout=false;
     /**
      * @inheritdoc
      */
@@ -73,7 +73,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('..\..\web\dist\views\home.html');
+//        return $this->render('..\..\web\dist\views\home.html');
+        return $this->render('index');
     }
 
     /**
