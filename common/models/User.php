@@ -197,7 +197,7 @@ class User extends ActiveRecord implements IdentityInterface
             "aud" => "http://example.com",
 //            "iat" => 1356999524,
 //            "nbf" => 1357000000,
-            "id"=>$this->id
+            "id"=>$this->id,
         );
         $jwt = JWT::encode($token, $key);
         $this->token_key=$jwt;

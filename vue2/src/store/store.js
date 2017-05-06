@@ -11,5 +11,14 @@ export default new Vuex.Store({
             id:'admin'
         },
         token:'dwadw',
+        isLogIn:false,
     },
+    mutations:{
+        login(state){
+            state.isLogIn=true;
+        },
+        logout(state){
+            state.isLogIn=false;
+        }
+    }
 })

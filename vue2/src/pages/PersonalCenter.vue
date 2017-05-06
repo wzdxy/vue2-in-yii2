@@ -8,6 +8,7 @@
             <mu-raised-button v-on:click="publish" label="Publish" class="demo-raised-button" primary/>
             <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
         </div>
+        <p>{{isLogin}}</p>
     </div>
 </template>
 
@@ -24,6 +25,9 @@
             }
         },
         computed:{
+            isLogin(){
+                return this.$store.state.isLogIn;
+            },
             user(){
                 return this.$store.state.user
             }
@@ -35,10 +39,10 @@
                         content:this.content,
                     })
                 ).then(function (res) {
-                    if(res&&res.data===0){
-                        this.msg='成功';
+                    if(res&&res.data.result===0){
+                        this.msg='发布成功';
                     }else{
-                        this.msg=res.statusText;
+                        this.msg=res.data.message;
                     }
                     this.open('top');
                 }.bind(this))

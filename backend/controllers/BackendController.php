@@ -13,9 +13,14 @@ class BackendController extends Controller
         $token_key=Yii::$app->request->headers->get('authorization');
         if(isset($token_key)){
             $modal=new User();
-            return $modal->validateToken($token_key);
+            if($modal->validateToken($token_key)){
+                return true;
+            }else{
+                return json_encode(['result'=>-1,'message'=>'用户验证失败']);
+            }
         }else{
-            return false;
+//            return false;
+            return json_encode(['result'=>-1,'message'=>'用户验证失败']);
         }
     }
 

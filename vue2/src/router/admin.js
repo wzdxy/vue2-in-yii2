@@ -9,6 +9,7 @@ import AdminUser from '@/pages/AdminUser'
 import AdminArticle from '@/pages/AdminArticle'
 import PersonalCenter from '@/pages/PersonalCenter'
 import Login from '@/pages/Login'
+import Signup from '@/pages/Signup'
 
 Vue.use(Router);
 
@@ -55,6 +56,11 @@ export default new Router({
             path: '/login',
             name: 'Login',
             component: Login
+        },
+        {
+            path: '/Signup',
+            name: 'Signup',
+            component: Signup
         }
     ]
 

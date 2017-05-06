@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\SignupForm;
 use common\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -85,7 +86,20 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+        return 0;
+    }
 
-        return $this->goHome();
+    public function actionSignup(){
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post(),'')) {
+            if ($user = $model->signup()) {
+                $user->setToken();
+                return json_encode(['result'=>0,'message'=>'signup failed','token'=>$user->token_key]);
+            }else{
+                return json_encode(['result'=>-2,'message'=>'signup failed']);
+            }
+        }else{
+            return json_encode(['result'=>-1,'message'=>'wrong param']);
+        }
     }
 }
