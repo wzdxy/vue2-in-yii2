@@ -19,6 +19,11 @@ class ArticleController extends BackendController
         }else{
             return json_encode(['result'=>-1,'message'=>$result]);
         }
+    }
 
+    public function actionList(){
+        $modal=new Article();
+        $List=$modal->getAllList();
+        return json_encode(['result'=>0,'list'=>$List]);
     }
 }

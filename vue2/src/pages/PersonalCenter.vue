@@ -1,6 +1,6 @@
 <template>
     <div id="PersonalCenter">
-        <h2>UserCenter</h2>
+        <h2>PersonalCenter</h2>
         <span>{{user.id}}</span>
         <div>
             <mu-text-field v-model="title" hintText="标题" type="text" icon="title"/><br/>
@@ -8,7 +8,6 @@
             <mu-raised-button v-on:click="publish" label="Publish" class="demo-raised-button" primary/>
             <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
         </div>
-        <p>{{isLogin}}</p>
     </div>
 </template>
 

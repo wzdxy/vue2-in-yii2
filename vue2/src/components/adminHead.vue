@@ -3,10 +3,10 @@
         <mu-flat-button href="#/" label="HOME" slot="left"/>
         <mu-flat-button href="#/article" label="Article" slot="left"/>
         <mu-flat-button href="#/user" label="User" slot="left"/>
-        <mu-flat-button href="#/login" label="Login" slot="right" />
-        <mu-flat-button href="#/signup" label="SignUp" slot="right"/>
-        <mu-flat-button href="#/personalcenter" label="PersonalCenter" slot="right"/>
-        <mu-flat-button color="white" label="logout" slot="right" v-on:click="logout"/>
+        <mu-flat-button href="#/login" label="Login" slot="right" v-if="!isLogin"/>
+        <mu-flat-button href="#/signup" label="SignUp" slot="right" v-if="!isLogin"/>
+        <mu-flat-button href="#/personalcenter" label="PersonalCenter" slot="right" v-if="isLogin"/>
+        <mu-flat-button color="white" label="logout" slot="right" v-on:click="logout" v-if="isLogin"/>
     </mu-appbar>
 </template>
 
@@ -28,7 +28,7 @@
         },
         computed:{
             isLogin:function(){
-                return this.$store.state.isLogIn;
+                return this.$store.state.user.log;
             }
         }
     }

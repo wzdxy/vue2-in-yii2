@@ -42,7 +42,7 @@ export default new Router({
             component: AdminArticle,
             meta:{
                 requireAuth:true
-            }
+            },
         },
         {
             path: '/personalcenter',

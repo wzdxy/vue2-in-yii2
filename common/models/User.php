@@ -216,4 +216,9 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
     }
+
+    public function getAllList(){
+        $List=self::find()->select(['id','username','email','status','created_at'])->asArray()->all();
+        return $List;
+    }
 }

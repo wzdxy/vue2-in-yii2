@@ -87,4 +87,9 @@ class Article extends \yii\db\ActiveRecord
             return json_encode($this->errors);
         }
     }
+
+    public function getAllList(){
+        return self::find()->select(['id','title','author_name','created_at'])->asArray()->all();
+
+    }
 }
