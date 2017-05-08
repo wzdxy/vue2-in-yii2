@@ -1,6 +1,6 @@
 <template>
     <mu-appbar>
-        <mu-flat-button href="#/" label="HOME" slot="left"/>
+        <!--<mu-flat-button href="#/" label="HOME" slot="left"/>-->
         <mu-flat-button href="#/article" label="Article" slot="left"/>
         <mu-flat-button href="#/user" label="User" slot="left"/>
         <mu-flat-button href="#/login" label="Login" slot="right" v-if="!isLogin"/>

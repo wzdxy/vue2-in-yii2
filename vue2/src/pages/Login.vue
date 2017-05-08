@@ -1,11 +1,13 @@
 <template>
     <div id="Login">
         <h2>请登录</h2>
-        <mu-text-field v-model="id" label="ID" hintText="请输入ID" labelFloat/><br/>
-        <mu-text-field @keyup.native.enter="submit" v-model="pw" label="密码" hintText="请输入密码" type="password" labelFloat/><br/>
-        <mu-raised-button v-on:click="submit" label="Login" class="demo-raised-button" primary/>
-
-        <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{error}}</mu-popup>
+        <form action="#">
+            <mu-text-field v-model="id" label="ID" hintText="请输入ID" labelFloat/><br/>
+            <mu-text-field @keyup.native.enter="submit" v-model="pw" label="密码" hintText="请输入密码" type="password" labelFloat/><br/>
+            <mu-raised-button v-on:click="submit" label="Login" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
+            <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{error}}</mu-popup>
+        </form>
+        <mu-circular-progress :size="60" :strokeWidth="7" v-if="loading"/>
     </div>
 </template>
 
@@ -20,6 +22,7 @@
                 pw:'',
                 error:'',
                 topPopup: false,
+                loading:false
             }
         },
         computed:{
@@ -29,11 +32,13 @@
         },
         methods:{
             submit:function () {
+                this.loading=true;
                 this.$http.post('/site/login',this.$qs.stringify({
                         id:this.id,
                         pw:this.pw,
                     })
                 ).then(function (res) {
+                    this.loading=false;
                     if(res&&res.data.result===0){
 //                        this.$store.state.isLogIn=true;
                         this.$store.commit('login',{id:this.id});
