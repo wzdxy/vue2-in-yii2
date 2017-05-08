@@ -3,13 +3,14 @@ Vue2 in Yii2
 1. init project
 ```bash
 composer install
+bower install
 init
 yii migrate
 cd vue2
 npm install
 
 #for build to yii, will distribute to vue2-in-yii2\backend\web\dist (or frontend\web\dist)
-#signin URL:f.localhost/index.php?r=site%2Fsignup
+#blog URL:f.localhost
 #admin URL:b.localhost/site/index#/personalcenter
 npm run build-module admin
 npm run build-module home

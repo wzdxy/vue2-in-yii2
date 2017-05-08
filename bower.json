@@ -1,0 +1,22 @@
+{
+  "name": "vue2-in-yii2",
+  "homepage": "https://github.com/wzdxy/vue2-in-yii2",
+  "authors": [
+    "zc <zc_93@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.98.2"
+  }
+}
