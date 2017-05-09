@@ -3,8 +3,8 @@
         <h2>PersonalCenter</h2>
         <p>用户名:{{user.id}}</p>
         <div style="padding: 10px;">
-            <mu-text-field v-model="title" hintText="标题" type="text" icon="title" fullWidth="true"/><br/>
-            <mu-text-field v-model="content" hintText="正文" multiLine :rows="10" :rowsMax="20" icon="assignment" fullWidth="true"/><br/>
+            <mu-text-field v-model="title" hintText="标题" type="text" icon="title" fullWidth=true /><br/>
+            <mu-text-field v-model="content" hintText="正文" multiLine :rows="10" :rowsMax="20" icon="assignment" fullWidth=true /><br/>
             <mu-text-field v-model="tag" hintText="标签" type="text" icon="label" slot="left" /><br/>
             <mu-raised-button v-on:click="publish" label="Publish" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
             <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>

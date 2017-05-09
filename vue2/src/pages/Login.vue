@@ -5,7 +5,7 @@
             <mu-text-field v-model="id" label="ID" hintText="请输入ID" labelFloat/><br/>
             <mu-text-field @keyup.native.enter="submit" v-model="pw" label="密码" hintText="请输入密码" type="password" labelFloat/><br/>
             <mu-raised-button v-on:click="submit" label="Login" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
-            <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{error}}</mu-popup>
+            <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
         </form>
         <mu-circular-progress :size="60" :strokeWidth="7" v-if="loading"/>
     </div>
@@ -20,7 +20,7 @@
                 isActive: true, hasError: true,
                 id:'',
                 pw:'',
-                error:'',
+                msg:'',
                 topPopup: false,
                 loading:false
             }
@@ -39,17 +39,19 @@
                     })
                 ).then(function (res) {
                     this.loading=false;
+                    this.msg=res.data.message;
+                    this.pw='';
                     if(res&&res.data.result===0){
-//                        this.$store.state.isLogIn=true;
                         this.$store.commit('login',{id:this.id});
                         window.localStorage.token_key=res.data.token;
+                        window.localStorage.user_id=this.id;
                         window.localStorage.token_time=new Date().getTime()+1000*60*60;
                         let redirect=this.$route.query.redirect||'/personalcenter';
                         this.$router.replace(redirect);
                     }else{
-                        this.error=res.data.message;
-                        this.open('top');
+
                     }
+                    this.open('top');
                 }.bind(this))
             },
             open (position) {

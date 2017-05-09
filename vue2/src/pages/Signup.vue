@@ -4,9 +4,9 @@
         <mu-text-field v-model="id" label="Name" hintText="请输入用户名" labelFloat/><br/>
         <mu-text-field v-model="email" label="Email" hintText="请输入邮箱" labelFloat/><br/>
         <mu-text-field @keyup.native.enter="submit" v-model="pw" label="Password" hintText="请输入密码" type="password" labelFloat/><br/>
-        <mu-raised-button v-on:click="submit" label="SignUp" class="demo-raised-button" primary/>
-        <p >输入的密码:{{pw}}</p>
-        <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{error}}</mu-popup>
+        <mu-raised-button v-on:click="submit" label="SignUp" class="demo-raised-button" primary v-if="!loading"/>
+        <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
+        <mu-circular-progress :size="60" :strokeWidth="7" v-if="loading"/>
     </div>
 </template>
 
@@ -19,8 +19,9 @@
                 id:'',
                 pw:'',
                 email:'',
-                error:'',
+                msg:'',
                 topPopup: false,
+                loading:false
             }
         },
         computed:{
@@ -30,6 +31,8 @@
         },
         methods:{
             submit:function () {
+                let That=this;
+                this.loading=true;
                 this.$http.post('/site/signup',this.$qs.stringify({
                         username:this.id,
                         password:this.pw,
@@ -40,15 +43,27 @@
                         window.localStorage.token_key=res.data.token;
                         window.localStorage.token_time=new Date().getTime()+1000*60*60;
                         let redirect=this.$route.query.redirect||'/personalcenter';
+                        this.id='';
+                        this.pw='';
+                        this.email='';
+                        setTimeout(function(){
+                            That.$router.replace(redirect);
+                        },2000);
+                        this.msg='sign up success';
+                        this.login()
                     }else{
-                        this.error=res.data.message;
-                        this.open('top');
+                        this.msg=res.data.message;
                     }
+                    this.open('top');
                 }.bind(this))
             },
             open (position) {
                 this[position + 'Popup'] = true
             },
+            login:function () {
+                console.log('auto log in after sign up'+this.id);
+                this.$store.commit('login',{id:this.id});
+            }
         },
         watch: {
             topPopup (val) {

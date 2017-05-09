@@ -68,5 +68,10 @@ window.vm=new Vue({
   el: '#app',
   router,store,
   template: '<App/>',
+  beforeMount:function () {
+      if(localStorage.token_key && localStorage.token_time > Date.now()){
+          this.$store.commit('login',{id:localStorage.user_id});
+      }
+  },
   components: { App }
 });

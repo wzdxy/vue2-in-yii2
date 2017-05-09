@@ -34,21 +34,21 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/site': {
-            target: 'http://127.0.0.1:82',
+            target: 'http://localhost:82',
             changeOrigin: true,
             pathRewrite: {
                 '^/site': '/site',
             }
         },
         '/article': {
-            target: 'http://127.0.0.1:82',
+            target: 'http://localhost:82',
             changeOrigin: true,
             pathRewrite: {
                 '^/article': '/article',
             }
         },
         '/user': {
-            target: 'http://127.0.0.1:82',
+            target: 'http://localhost:82',
             changeOrigin: true,
             pathRewrite: {
                 '^/user': '/user',

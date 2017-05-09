@@ -94,7 +94,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post(),'')) {
             if ($user = $model->signup()) {
                 $user->setToken();
-                return json_encode(['result'=>0,'message'=>'signup failed','token'=>$user->token_key]);
+                return json_encode(['result'=>0,'message'=>'signup success','token'=>$user->token_key]);
             }else{
                 return json_encode(['result'=>-2,'message'=>'signup failed']);
             }
