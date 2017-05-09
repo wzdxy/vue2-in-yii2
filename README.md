@@ -11,7 +11,7 @@ npm install
 
 #for build to yii, will distribute to vue2-in-yii2\backend\web\dist (or frontend\web\dist)
 #blog URL:f.localhost
-#admin URL:b.localhost/site/index#/personalcenter
+#admin URL:b.localhost:82/#/signup
 npm run build-module admin
 npm run build-module home
 
