@@ -16,9 +16,8 @@ use frontend\models\ContactForm;
 /**
  * Site controller
  */
-class DefaultController extends Controller
+class DefaultController extends FrontController
 {
-    public $layout=false;
     /**
      * @inheritdoc
      */
@@ -49,22 +48,6 @@ class DefaultController extends Controller
             ],
         ];
     }
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
     /**
      * Displays homepage.
      *

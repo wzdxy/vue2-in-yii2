@@ -24,27 +24,25 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">BLOG</a>
+<div class="navbar-fixed"><nav>
+    <div class="nav-wrapper  light-blue accent-4">
+        <a href="/" class="brand-logo">BLOG</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#">Articles</a></li>
-            <li><a href="#">Tags</a></li>
-            <li><a href="#">Authors</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/catalog">Catalog</a></li>
+            <li><a href="/tag">Tag</a></li>
+            <li><a href="/site/about">About</a></li>
+            <li><a href="/site/contact">Contact</a></li>
         </ul>
     </div>
-</nav>
+</nav></div>
 <main class="wrap">
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </main>
 
-<footer class="page-footer" style="padding-top: 0;">
+<footer class="page-footer light-blue accent-4" style="padding-top: 0;">
     <div class="footer-copyright">
         <div class="container">
             © 2014 Copyright Text

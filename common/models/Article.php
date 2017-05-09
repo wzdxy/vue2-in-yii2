@@ -90,6 +90,9 @@ class Article extends \yii\db\ActiveRecord
 
     public function getAllList(){
         return self::find()->select(['id','title','author_name','created_at'])->asArray()->all();
+    }
 
+    public static function getAllHead(){
+        return self::find()->select(['id','title','text','author_name','created_at'])->asArray()->all();
     }
 }
