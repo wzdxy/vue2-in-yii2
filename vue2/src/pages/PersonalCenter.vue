@@ -4,20 +4,25 @@
         <p>用户名:{{user.id}}</p>
         <div style="padding: 10px;">
             <mu-text-field v-model="title" hintText="标题" type="text" icon="title" fullWidth=true /><br/>
-            <mu-text-field v-model="content" hintText="正文" multiLine :rows="10" :rowsMax="20" icon="assignment" fullWidth=true /><br/>
+            <mavon-editor v-model="content"/>
             <mu-text-field v-model="tag" hintText="标签" type="text" icon="label" slot="left" /><br/>
-            <mu-raised-button v-on:click="publish" label="Publish" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
-            <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
+            <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
+            <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right"/>
         </div>
-        <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading"/>
+        <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
+
     </div>
 </template>
 
 <script>
+    import mavonEditor from 'mavon-editor'
+    import 'mavon-editor/dist/css/index.css'
+
     export default {
         name: 'app',
         data(){
             return {
+                value:'',
                 isActive: true, hasError: true,
                 title:'',
                 content:'',
@@ -69,6 +74,9 @@
                     }, 3000)
                 }
             }
+        },
+        components:{
+            'mavon-editor': mavonEditor.mavonEditor
         }
     }
 </script>
