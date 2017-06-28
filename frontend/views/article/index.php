@@ -1,4 +1,5 @@
 <?php
+use frontend\assets\HighlightAsset;
 
 /* @var $this yii\web\View */
 
@@ -21,3 +22,7 @@ $this->title = $article->title;
             </div>
     </div>
 </div>
+
+<?php
+HighlightAsset::register($this);
+?>

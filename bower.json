@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "materialize": "^0.98.2"
+    "materialize": "^0.98.2",
+    "highlightjs": "^9.12.0"
   }
 }
