@@ -10,9 +10,9 @@ $this->title = '目录';
         <?php foreach ($list as $article){?>
             <div class="row">
                 <div class="col s12 m8">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title"><?=$article['title']?></span>
+                    <div class="article-item card blue-grey darken-1">
+                        <div class="article-content card-content white-text">
+                            <a href=<?='article/'.$article['id']?> class="card-title"><?=$article['title']?></a>
                             <p><?=mb_substr($article['text'],0,140,'utf-8').(mb_strlen($article['text'])>140?"...":"")?></p>
                         </div>
                         <div class="card-action">
@@ -24,5 +24,12 @@ $this->title = '目录';
                 </div>
             </div>
         <?php } ?>
+        <?php if(count($list)==0) {?>
+            <p>Before you publish a article you can not see anything</p>
+        <?php }?>
     </div>
 </div>
+
+<?php
+$this->registerCssFile('@web/css/catalog.css');
+?>
