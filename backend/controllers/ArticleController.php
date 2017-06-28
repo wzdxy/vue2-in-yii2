@@ -10,10 +10,11 @@ class ArticleController extends BackendController
 {
     public function actionPublish(){
         $post=Yii::$app->request->post();
-        $text=$post['content'];
+        $text=$post['md'];
         $title=$post['title'];
+        $html=$post['html'];
         $modal=new Article();
-        $result=$modal->publish($title,$text);
+        $result=$modal->publish($title,$text,$html);
         if($result===0){
             return json_encode(['result'=>0,'message'=>'发布成功']);
         }else{

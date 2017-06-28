@@ -69,11 +69,11 @@ class Article extends \yii\db\ActiveRecord
      * @param $text
      * @return bool
      */
-    public function publish($title,$text){
+    public function publish($title,$text,$html){
         $User=Yii::$app->user->getIdentity();
         $this->title=$title;
         $this->text=$text;
-        $this->html=$text;
+        $this->html=$html;
         $this->tag='';
         $this->url='';
         $this->type='';
