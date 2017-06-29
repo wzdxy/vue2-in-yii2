@@ -221,4 +221,8 @@ class User extends ActiveRecord implements IdentityInterface
         $List=self::find()->select(['id','username','email','status','created_at'])->asArray()->all();
         return $List;
     }
+
+    public static function getCount(){
+        return static::find()->count();
+    }
 }

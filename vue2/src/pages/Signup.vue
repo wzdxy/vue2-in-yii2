@@ -39,6 +39,7 @@
                         email:this.email,
                     })
                 ).then(function (res) {
+                    this.loading=false;
                     if(res&&res.data.result===0){
                         window.localStorage.token_key=res.data.token;
                         window.localStorage.token_time=new Date().getTime()+1000*60*60;

@@ -91,6 +91,7 @@ class SiteController extends Controller
 
     public function actionSignup(){
         $model = new SignupForm();
+        if(User::getCount()>0)return json_encode(['result'=>-3,'message'=>'sign up is not allow now']);
         if ($model->load(Yii::$app->request->post(),'')) {
             if ($user = $model->signup()) {
                 $user->setToken();
