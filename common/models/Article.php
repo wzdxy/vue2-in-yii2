@@ -80,7 +80,6 @@ class Article extends \yii\db\ActiveRecord
         $this->author_id=$User->id;
         $this->author_name=$User->username;
         $this->status=0;
-        //FIXME 存储到数据库里的中文全是问号
         if($this->save()){
             return 0;
         }else{
