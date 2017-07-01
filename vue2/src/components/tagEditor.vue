@@ -21,7 +21,7 @@
             return {
                 isActive: true, hasError: true,
                 selectedTags:[
-                        {name:'linux',isNew:true}
+                        {name:'linux',isNew:false}
                     ],
                 existTags:[
                         {name:'js',selected:false},{name:'php',selected:false},{name:'linux',selected:true}
@@ -32,7 +32,6 @@
         methods:{
             addTag:function () {
                 this.selectedTags.push({name:this.newTagInput,isNew:!this.isInputExist});
-//                this.existTags.push({name:this.newTagInput,isNew:!this.isInputExist});
                 this.newTagInput='';
             },
             selectTag:function (idx) {
@@ -43,7 +42,11 @@
                 }
             },
             deleteTag:function (idx) {
-                console.log(idx);
+                let targetTag=this.selectedTags[idx];
+                if(!targetTag.isNew)this.existTags.filter(function (item) {
+                    return item.name===targetTag.name;
+                }.bind(this))[0].selected=false;
+                this.selectedTags.splice(idx,1);
             }
         },
         computed:{
@@ -60,7 +63,7 @@
 
     }
     .exist-tag,.selected-tag{
-        padding:4px 6px;
+        padding:2px 6px;
         margin:0 2px;
         border: 1px solid;
         display: inline-block;
