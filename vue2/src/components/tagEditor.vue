@@ -7,7 +7,7 @@
                     <span class="del-tag-btn" v-on:click="deleteTag(idx)">x</span>
                 </span>
             </span>
-            <input type="text" v-model="newTagInput" class="tag-input" @keyup.enter="addTag"></div>
+            <input type="text" v-model="newTagInput" class="tag-input" @keyup.enter="addTag" @keyup.delete="backspaceKeyDelete"></div>
             <div class="exist-tag-box">
                 <span v-for="( tag , idx) in existTags" v-if="!existTags[idx].selected" class="exist-tag" v-on:click="selectTag(idx)">{{tag.name}}</span>
             </div>
@@ -19,7 +19,6 @@
         name: 'tag-editor',
         data(){
             return {
-                isActive: true, hasError: true,
                 selectedTags:[
                         {name:'linux',isNew:false}
                     ],
@@ -47,6 +46,9 @@
                     return item.name===targetTag.name;
                 }.bind(this))[0].selected=false;
                 this.selectedTags.splice(idx,1);
+            },
+            backspaceKeyDelete:function () {
+                if(!this.newTagInput)this.deleteTag(this.selectedTags.length-1);
             }
         },
         computed:{
@@ -60,13 +62,16 @@
 
 <style>
     .edit-areas,.exist-tag-box{
-
+        min-height: 30px;
     }
     .exist-tag,.selected-tag{
         padding:2px 6px;
         margin:0 2px;
         border: 1px solid;
         display: inline-block;
+    }
+    .exist-tag{
+        cursor: pointer;
     }
     .tag-input{
         border: none;
