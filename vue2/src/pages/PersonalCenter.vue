@@ -6,6 +6,9 @@
             <mu-text-field v-model="title" hintText="标题" type="text" icon="title" fullWidth=true /><br/>
             <mavon-editor v-model="md" v-on:change="editorChange" v-bind:toolbars="toolbars"/>
             <mu-text-field v-model="tag" hintText="标签" type="text" icon="label" slot="left" /><br/>
+
+            <tag-editor></tag-editor>
+
             <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
             <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right"/>
         </div>
@@ -17,6 +20,7 @@
 <script>
     import mavonEditor from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
+    import TagEditor from "../components/tagEditor";
 
     export default {
         name: 'app',
@@ -113,7 +117,7 @@
             }
         },
         components:{
-            'mavon-editor': mavonEditor.mavonEditor
+            TagEditor, 'mavon-editor': mavonEditor.mavonEditor
         }
     }
 </script>
