@@ -19,7 +19,6 @@ class BackendController extends Controller
                 return json_encode(['result'=>-1,'message'=>'用户验证失败']);
             }
         }else{
-//            return false;
             return json_encode(['result'=>-1,'message'=>'用户验证失败']);
         }
     }

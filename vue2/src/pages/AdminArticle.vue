@@ -19,7 +19,6 @@
                     <mu-td>{{item.created_at }}</mu-td>
                 </mu-tr>
             </mu-tbody>
-
         </mu-table>
     </div>
 </template>

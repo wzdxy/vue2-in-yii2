@@ -13,8 +13,9 @@ class ArticleController extends BackendController
         $text=$post['md'];
         $title=$post['title'];
         $html=$post['html'];
+        $tag=json_decode($post['tag']);
         $modal=new Article();
-        $result=$modal->publish($title,$text,$html);
+        $result=$modal->publish($title,$text,$html,$tag);
         if($result===0){
             return json_encode(['result'=>0,'message'=>'发布成功']);
         }else{

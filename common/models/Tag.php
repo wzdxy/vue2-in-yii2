@@ -51,7 +51,8 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     public function add(){
-        if(static::find())
+        if(static::find()->where(['id'=>$this->id])->count()>0)return false;
+        $this->url=$this->name;
         $this->save();
     }
 

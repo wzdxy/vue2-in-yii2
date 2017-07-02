@@ -24,6 +24,6 @@ class TagController extends BackendController
     }
 
     public function actionList(){
-        return json_encode(Tag::getAllList());
+        return json_encode(['result'=>0,'list'=>Tag::getAllList()]);
     }
 }

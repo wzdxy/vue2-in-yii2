@@ -5,11 +5,10 @@
         <div style="padding: 10px;">
             <mu-text-field v-model="title" hintText="标题" type="text" icon="title" fullWidth=true /><br/>
             <mavon-editor v-model="md" v-on:change="editorChange" v-bind:toolbars="toolbars"/>
-            <mu-text-field v-model="tag" hintText="标签" type="text" icon="label" slot="left" /><br/>
 
-            <tag-editor></tag-editor>
+            <tag-editor v-model="tag"></tag-editor>
 
-            <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
+            <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!title||!md" v-if="!loading"/>
             <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right"/>
         </div>
         <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
@@ -31,7 +30,7 @@
                 title:'',
                 md:'',
                 html:'',
-                tag:'',
+                tag:[],
                 topPopup: false,
                 msg:'',
                 loading:false,
@@ -70,11 +69,13 @@
         },
         methods:{
             publish:function () {
+                if(this.title==='' || this.md==='')return;
                 this.loading=true;
                 this.$http.post('/article/publish',this.$qs.stringify({
                         title:this.title,
                         md:this.md,
-                        html:this.html
+                        html:this.html,
+                        tag:JSON.stringify(this.tag)
                     })
                 ).then(function (res) {
                     this.loading=false;
@@ -94,6 +95,7 @@
             initEditor:function () {
                 this.md='';
                 this.title='';
+                this.tag=[]
             },
             open (position) {
                 this[position + 'Popup'] = true
@@ -118,7 +120,7 @@
         },
         components:{
             TagEditor, 'mavon-editor': mavonEditor.mavonEditor
-        }
+        },
     }
 </script>
 

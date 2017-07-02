@@ -67,10 +67,18 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @param $title
      * @param $text
+     * @param $html
+     * @param $tags
      * @return bool
      */
-    public function publish($title,$text,$html){
+    public function publish($title,$text,$html,$tags){
         $User=Yii::$app->user->getIdentity();
+        foreach ($tags as $tag){
+            if($tag->isNew && Tag::find()->where(['name'=>$tag->name])->count()==0){
+                $tagModel=new Tag(['name'=>$tag->name]);
+                $tagModel->add();
+            }
+        }
         $this->title=$title;
         $this->text=$text;
         $this->html=$html;

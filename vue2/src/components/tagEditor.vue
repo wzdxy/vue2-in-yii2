@@ -7,7 +7,7 @@
                     <span class="del-tag-btn" v-on:click="deleteTag(idx)">x</span>
                 </span>
             </span>
-            <input type="text" v-model="newTagInput" class="tag-input" @keyup.enter="addTag" @keyup.delete="backspaceKeyDelete"></div>
+            <input type="text" v-model="newTagInput" class="tag-input" @keydown.enter="addTag" @keydown.delete="backspaceKeyDelete"></div>
             <div class="exist-tag-box">
                 <span v-for="( tag , idx) in existTags" v-if="!existTags[idx].selected" class="exist-tag" v-on:click="selectTag(idx)">{{tag.name}}</span>
             </div>
@@ -19,24 +19,23 @@
         name: 'tag-editor',
         data(){
             return {
-                selectedTags:[
-                        {name:'linux',isNew:false}
-                    ],
-                existTags:[
-                        {name:'js',selected:false},{name:'php',selected:false},{name:'linux',selected:true}
-                    ],
+                selectedTags:this.value,
+                existTags:[],
                 newTagInput:''
             }
         },
+        props:['value'],
         methods:{
             addTag:function () {
-                this.selectedTags.push({name:this.newTagInput,isNew:!this.isInputExist});
-                this.newTagInput='';
+                if(this.newTagInput!==''){
+                    this.selectedTags.push({name:this.newTagInput,isNew:!this.isInputExist});
+                    this.newTagInput='';
+                }
             },
             selectTag:function (idx) {
                 let targetTag=this.existTags[idx];
                 if(targetTag.selected===false){
-                    this.selectedTags.push(targetTag);
+                    this.selectedTags.push({name:targetTag.name,isNew:false});
                     targetTag.selected=true;
                 }
             },
@@ -56,11 +55,28 @@
                 let This=this;
                 return this.existTags.filter(function (item) {return item.name===This.newTagInput;}).length>0;
             }
+        },
+        /**
+         * 获取已存在的Tags
+         */
+        beforeCreate:function(){
+            let This=this;
+            vm.$http.get('/tag/list').then(function (res) {
+                if(res.data.result===0){
+                    This.existTags=[];
+                    for(let i=0,m=res.data.list.length;i<m;i++){
+                        This.existTags.push({name:res.data.list[i].name,selected:false});
+                    }
+                }
+            });
         }
     }
 </script>
 
 <style>
+    #tagEditor{
+        padding:15px 0;
+    }
     .edit-areas,.exist-tag-box{
         min-height: 30px;
     }
