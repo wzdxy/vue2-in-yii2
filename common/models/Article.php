@@ -73,12 +73,7 @@ class Article extends \yii\db\ActiveRecord
      */
     public function publish($title,$text,$html,$tags){
         $User=Yii::$app->user->getIdentity();
-        foreach ($tags as $tag){
-            if($tag->isNew && Tag::find()->where(['name'=>$tag->name])->count()==0){
-                $tagModel=new Tag(['name'=>$tag->name]);
-                $tagModel->add();
-            }
-        }
+
         $this->title=$title;
         $this->text=$text;
         $this->html=$html;
@@ -89,10 +84,26 @@ class Article extends \yii\db\ActiveRecord
         $this->author_name=$User->username;
         $this->status=0;
         if($this->save()){
+            $this->addTags($tags);
             return 0;
         }else{
             return json_encode($this->errors);
         }
+    }
+
+    public function addTags($tags){
+        foreach ($tags as $tag){
+            if($tag->isNew && Tag::find()->where(['name'=>$tag->name])->count()==0){
+                $tagModel=new Tag(['name'=>$tag->name]);
+                $tagId=$tagModel->add();
+            }else{
+                $tagId=Tag::findOne(['name'=>$tag->name])->id;
+                $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id]);
+                $rs->save();
+            }
+
+        }
+        return 0;
     }
 
     public function getAllList(){

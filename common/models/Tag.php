@@ -54,6 +54,7 @@ class Tag extends \yii\db\ActiveRecord
         if(static::find()->where(['id'=>$this->id])->count()>0)return false;
         $this->url=$this->name;
         $this->save();
+        return $this->id;
     }
 
     public static function getAllList(){
