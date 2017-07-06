@@ -28,4 +28,10 @@ class ArticleController extends BackendController
         $List=$modal->getAllList();
         return json_encode(['result'=>0,'list'=>$List]);
     }
+
+    public function actionText(){
+        $id=Yii::$app->request->get('id');
+        $text=Article::getText($id);
+        return json_encode(['result'=>0,'content'=>$text]);
+    }
 }

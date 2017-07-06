@@ -15,8 +15,9 @@
 </template>
 
 <script>
+//    module.exports= {
     export default {
-        name: 'tag-editor',
+        name: 'tagEditor',
         data(){
             return {
                 selectedTags:this.value,
