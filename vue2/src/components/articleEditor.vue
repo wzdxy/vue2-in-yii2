@@ -1,11 +1,11 @@
 <template>
     <div id="article-editor">
         {{action}}
-        <mu-text-field v-model="title" hintText="标题" type="text" icon="title" fullWidth='true' /><br/>
+        <mu-text-field v-model="prop_title" hintText="标题" type="text" icon="title" fullWidth /><br/>
 
-        <mavon-editor v-model="md" v-on:change="editorChange" v-bind:toolbars="toolbars"/>
+        <mavon-editor v-model="prop_md" v-on:change="editorChange" v-bind:toolbars="toolbars" :ishljs="false"/>
 
-        <tag-editor v-model="tag"></tag-editor>
+        <tag-editor  :selectedTags="tag"></tag-editor> <!--v-model="tag"-->
 
         <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!title||!md" v-if="!loading"/>
         <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right"/>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    import tagEditor from './tagEditor.vue';
+    import tagEditor from './tagEditor.vue'
     import mavonEditor from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
     export default {
@@ -22,10 +22,10 @@
         data(){
             return {
                 value:'',
-//                title:'',
-//                md:'',
+                prop_title:this.title||'',
+                prop_md:this.md||'',
+                prop_tag:this.tag||[],
                 html:'',
-                tag:[],
                 topPopup: false,
                 msg:'',
                 loading:false,
@@ -44,26 +44,27 @@
                     table: true, // 表格
                     subfield: true, // 是否需要分栏
                     fullscreen: true, // 全屏编辑
-//                    readmodel: true, // 沉浸式阅读
+                    readmodel: true, // 沉浸式阅读
                     htmlcode: true, // 展示html源码
                     help: true, // 帮助
                     undo: true, // 上一步
                     redo: true, // 下一步
                     trash: true, // 清空
 //                    save: true, // 保存（触发events中的save事件）
+//                    subfield: true,
                 }
             }
         },
-        props:['action','md','title'],
+        props:['action','md','title','tag'],
         methods:{
             publish:function () {
-                if(this.title==='' || this.md==='')return;
+                if(this.prop_title==='' || this.prop_md==='')return;
                 this.loading=true;
                 this.$http.post('/article/publish',this.$qs.stringify({
                         title:this.title,
                         md:this.md,
                         html:this.html,
-                        tag:JSON.stringify(this.tag)
+                        tag:JSON.stringify(this.tag)||''
                     })
                 ).then(function (res) {
                     this.loading=false;
@@ -80,9 +81,9 @@
              * 清空编辑器
              */
             initEditor:function () {
-                this.md='';
-                this.title='';
-                this.tag=[]
+                this.prop_md='';
+                this.prop_title='';
+                this.prop_tag=[]
             },
             open (position) {
                 this[position + 'Popup'] = true
@@ -103,11 +104,23 @@
                         this.topPopup = false
                     }, 3000)
                 }
+            },
+            prop_md:function (val) {
+                this.$emit('update:md',val);
+            },
+            prop_title:function (val) {
+                this.$emit('update:title',val);
+            },
+            prop_tag:function (val) {
+                this.$emit('update:tag',tag);
             }
         },
         components:{
             'tag-editor':tagEditor, 'mavon-editor': mavonEditor.mavonEditor
         },
+        mounted:function () {
+            console.log(vm);
+        }
     }
 </script>
 

@@ -92,18 +92,21 @@ class Article extends \yii\db\ActiveRecord
     }
 
     public function addTags($tags){
-        foreach ($tags as $tag){
-            if($tag->isNew && Tag::find()->where(['name'=>$tag->name])->count()==0){
-                $tagModel=new Tag(['name'=>$tag->name]);
-                $tagId=$tagModel->add();
-            }else{
-                $tagId=Tag::findOne(['name'=>$tag->name])->id;
-                $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id]);
-                $rs->save();
-            }
+        if(is_array($tags)){
+            foreach ($tags as $tag){
+                if($tag->isNew && Tag::find()->where(['name'=>$tag->name])->count()==0){
+                    $tagModel=new Tag(['name'=>$tag->name]);
+                    $tagId=$tagModel->add();
+                }else{
+                    $tagId=Tag::findOne(['name'=>$tag->name])->id;
+                    $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id]);
+                    $rs->save();
+                }
 
+            }
+            return 0;
         }
-        return 0;
+
     }
 
     public function getAllList(){
