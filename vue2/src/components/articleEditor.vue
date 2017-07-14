@@ -7,7 +7,7 @@
 
         <tag-editor  :selectedTags="tag"></tag-editor> <!--v-model="tag"-->
 
-        <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!title||!md" v-if="!loading"/>
+        <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading"/>
         <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right"/>
         <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
     </div>
@@ -61,10 +61,10 @@
                 if(this.prop_title==='' || this.prop_md==='')return;
                 this.loading=true;
                 this.$http.post('/article/publish',this.$qs.stringify({
-                        title:this.title,
-                        md:this.md,
+                        title:this.prop_title,
+                        md:this.prop_md,
                         html:this.html,
-                        tag:JSON.stringify(this.tag)||''
+                        tag:JSON.stringify(this.prop_tag)||''
                     })
                 ).then(function (res) {
                     this.loading=false;
