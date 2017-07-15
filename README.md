@@ -38,7 +38,13 @@ npm run dev
     CustomLog "logs/frontend-access.log" common
 </VirtualHost>
 ```
-3. Database migrate:`yii migrate` 
+3. Demo:
+    
+     - my new blog : [test.zchi.me](http:test.zchi.me)
+     - screenshots :
+     ![](http://odovakhft.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170716014125.png)
+     ![](http://odovakhft.bkt.clouddn.com/TIM%E6%88%AA%E5%9B%BE20170716013821.png)
+     
 4. PROJECT STRUCTURE
     
     [Click To View A Topo](http://naotu.baidu.com/file/91dcd0a543fae20cf915f0ba0bb3ea7a?token=c61c047bd874641f)
