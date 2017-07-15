@@ -52,7 +52,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
 //        echo var_dump(Yii::$app->user->isGuest)+"<br>"+var_dump(Yii::$app->user->identity);
-        return $this->render('..\..\web\dist\views\admin.html');
+        return $this->render('../../web/dist/views/admin.html');
     }
 
     /**

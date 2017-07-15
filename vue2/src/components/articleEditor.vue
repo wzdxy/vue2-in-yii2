@@ -1,14 +1,14 @@
 <template>
     <div id="article-editor">
-        {{action}}
+        <h2 style="padding-left: 30px;">{{action.toUpperCase()}}</h2>
         <mu-text-field v-model="prop_title" hintText="标题" type="text" icon="title" fullWidth /><br/>
 
         <mavon-editor v-model="prop_md" v-on:change="editorChange" v-bind:toolbars="toolbars" :ishljs="false"/>
 
         <tag-editor  :selectedTags="tag"></tag-editor> <!--v-model="tag"-->
 
-        <mu-raised-button v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading"/>
-        <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right"/>
+        <mu-raised-button  v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading"/>
+        <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right" class="loading-circular"/>
         <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
     </div>
 </template>
@@ -125,5 +125,8 @@
 </script>
 
 <style>
-
+    .demo-raised-button,.loading-circular{
+        position: absolute;
+        left: calc(50% - 45px);
+    }
 </style>

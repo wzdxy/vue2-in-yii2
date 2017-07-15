@@ -1,7 +1,7 @@
 <template>
     <div id="PersonalCenter">
-        <h2>PersonalCenter</h2>
-        <p>用户名:{{user.id}}</p>
+        <!--<h2>PersonalCenter</h2>-->
+        <!--<p>用户名:{{user.id}}</p>-->
         <div style="padding: 10px;">
             <article-editor action="add" :title.sync="title"></article-editor>
         </div>

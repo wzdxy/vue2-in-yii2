@@ -89,6 +89,7 @@
 <style>
     #tagEditor{
         padding:15px 0;
+        text-align: center;
     }
     .edit-areas,.exist-tag-box{
         min-height: 30px;

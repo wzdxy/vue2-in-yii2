@@ -1,6 +1,6 @@
 <template>
     <div id="AdminArticle">
-        <h2>Article</h2>
+        <h2 style="padding-left: 30px;">Article</h2>
         <mu-table :enableSelectAll="true" :multiSelectable="true"
                   :selectable="true" :showCheckbox="true">
             <mu-thead slot="header">
