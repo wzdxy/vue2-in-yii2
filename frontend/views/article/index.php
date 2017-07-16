@@ -12,8 +12,18 @@ $this->title = $article->title;
                 <div class="col s12 m10">
                     <div class="card blue-grey darken-1">
                         <div class="card-action">
-                            <a><?=$article->author_name?></a> <a style="float: right;"><?=$article->created_at?></a>
+
+                            <span class="tag-box">
+                                <?php foreach ($tags as $tag){?>
+                                    <a class="tag-item btn" href="/tag/<?=$tag->url?>">
+                                        <i class="fa fa-tag fa-1" aria-hidden="true"></i>
+                                        <span><?=$tag->name?></span>
+                                    </a>
+                                <?php }?>
+                            </span>
+                            <a ><?=$article->author_name?></a> <a ><?=$article->created_at?></a>
                         </div>
+
                         <div class="card-content white-text">
                             <?=$article->html?>
                         </div>
@@ -25,4 +35,5 @@ $this->title = $article->title;
 
 <?php
 HighlightAsset::register($this);
+$this->registerCssFile('@web/css/article.css',['depends'=>'frontend\assets\AppAsset']);
 ?>

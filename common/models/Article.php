@@ -99,10 +99,9 @@ class Article extends \yii\db\ActiveRecord
                     $tagId=$tagModel->add();
                 }else{
                     $tagId=Tag::findOne(['name'=>$tag->name])->id;
-                    $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id]);
-                    $rs->save();
                 }
-
+                $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id]);
+                $rs->save();
             }
             return 0;
         }

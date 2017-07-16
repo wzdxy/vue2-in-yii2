@@ -84,4 +84,7 @@
         justify-content: center;
         max-width: 375px;
     }
+    #Login{
+        text-align: center;
+    }
 </style>

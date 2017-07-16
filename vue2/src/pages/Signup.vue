@@ -89,4 +89,7 @@
         justify-content: center;
         max-width: 375px;
     }
+    #Signup{
+        text-align: center;
+    }
 </style>

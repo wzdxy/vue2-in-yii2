@@ -1,0 +1,9 @@
+.tag-box{
+    display: inline-block;
+    margin-right: 30px;
+}
+.tag-item{
+    padding: 0 1rem;
+    height: 32px;
+    line-height: 32px;
+}

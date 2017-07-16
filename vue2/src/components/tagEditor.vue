@@ -2,7 +2,7 @@
     <div id="tagEditor">
         <div class="edit-areas">
             <span class="selected-tag-box">
-                <span v-for="( tag , idx ) in prop_selectedTag" class="selected-tag">
+                <span v-for="( tag , idx ) in prop_selectedTags" class="selected-tag">
                     {{tag.name}}
                     <span class="del-tag-btn" v-on:click="deleteTag(idx)">x</span>
                 </span>
@@ -19,7 +19,7 @@
         name: 'tagEditor',
         data(){
             return {
-                prop_selectedTag:this.selectedTags,
+                prop_selectedTags:this.selectedTags,
                 existTags:[],
                 newTagInput:''
             }
@@ -33,26 +33,26 @@
         methods:{
             addTag:function () {
                 if(this.newTagInput!==''){
-                    this.prop_selectedTag.push({name:this.newTagInput,isNew:!this.isInputExist});
+                    this.prop_selectedTags.push({name:this.newTagInput,isNew:!this.isInputExist});
                     this.newTagInput='';
                 }
             },
             selectTag:function (idx) {
                 let targetTag=this.existTags[idx];
                 if(targetTag.selected===false){
-                    this.prop_selectedTag.push({name:targetTag.name,isNew:false});
+                    this.prop_selectedTags.push({name:targetTag.name,isNew:false});
                     targetTag.selected=true;
                 }
             },
             deleteTag:function (idx) {
-                let targetTag=this.prop_selectedTag[idx];
+                let targetTag=this.prop_selectedTags[idx];
                 if(!targetTag.isNew)this.existTags.filter(function (item) {
                     return item.name===targetTag.name;
                 }.bind(this))[0].selected=false;
-                this.prop_selectedTag.splice(idx,1);
+                this.prop_selectedTags.splice(idx,1);
             },
             backspaceKeyDelete:function () {
-                if(!this.newTagInput)this.deleteTag(this.prop_selectedTag.length-1);
+                if(!this.newTagInput)this.deleteTag(this.prop_selectedTags.length-1);
             }
         },
         computed:{
@@ -79,8 +79,8 @@
             });
         },
         watch:{
-            prop_selectedTag:function (val) {
-                this.$emit('update:selectedTag',val)
+            prop_selectedTags:function (val) {
+                this.$emit('update:selectedTags',val)
             }
         }
     }

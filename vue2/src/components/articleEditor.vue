@@ -5,7 +5,7 @@
 
         <mavon-editor v-model="prop_md" v-on:change="editorChange" v-bind:toolbars="toolbars" :ishljs="false"/>
 
-        <tag-editor  :selectedTags="tag"></tag-editor> <!--v-model="tag"-->
+        <tag-editor  :selectedTags.sync="prop_tag"></tag-editor> <!--v-model="tag"-->
 
         <mu-raised-button  v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading"/>
         <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right" class="loading-circular"/>
@@ -55,7 +55,13 @@
                 }
             }
         },
-        props:['action','md','title','tag'],
+//        props:['action','md','title','tag'],
+        props:{
+            action: {type:String,default:''},
+            md: {type:String,default:''},
+            title: {type:String,default:''},
+            tag:{type:Array,default:()=>[]}
+        },
         methods:{
             publish:function () {
                 if(this.prop_title==='' || this.prop_md==='')return;
@@ -112,7 +118,7 @@
                 this.$emit('update:title',val);
             },
             prop_tag:function (val) {
-                this.$emit('update:tag',tag);
+                this.$emit('update:tag',val);
             }
         },
         components:{
