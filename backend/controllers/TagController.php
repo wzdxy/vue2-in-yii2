@@ -3,6 +3,8 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Tag;
+use yii\helpers\ArrayHelper;
+
 /**
  * Site controller
  */
@@ -24,6 +26,6 @@ class TagController extends BackendController
     }
 
     public function actionList(){
-        return json_encode(['result'=>0,'list'=>Tag::getAllList()]);
+        return json_encode(['result'=>0,'list'=>ArrayHelper::toArray(Tag::getAllList())]);
     }
 }

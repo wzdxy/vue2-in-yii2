@@ -6,12 +6,16 @@ $this->title = '目录';
 ?>
 <div class="site-index" style="padding-top: 5px">
     <div class="">
-        <h1>All Tags</h1>
+        <h2><?=isset($tag)?$tag->name:''?></h2>
         <div class="collection">
-            <a href="#!" class="collection-item"><span class="badge">16</span>One</a>
-            <a href="#!" class="collection-item"><span class="badge">4</span>Two</a>
-            <a href="#!" class="collection-item"><span class="badge">3</span>Three</a>
-            <a href="#!" class="collection-item"><span class="badge">4</span>Four</a>
+            <?php if($articles!==false && count($articles)>0) {?>
+                <?php foreach ($articles as $idx=> $article){
+                    echo '<a href="/article/'.$article->id.'" class="collection-item"><span class="badge">'.$article->author_name.'</span>'.$article->title.'</a>';
+                }?>
+            <?php }else {?>
+                沒有內容
+            <?php } ?>
+
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "article".
@@ -100,12 +101,25 @@ class Article extends \yii\db\ActiveRecord
                 }else{
                     $tagId=Tag::findOne(['name'=>$tag->name])->id;
                 }
-                $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id]);
+                $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id,'type'=>'tag-article']);
                 $rs->save();
+                $tagArticleCount=Tag::findOne(['id'=>$tagId])->refreshCount();
             }
             return 0;
         }
+    }
 
+
+
+    public static function getByTagUrl($url){
+        $tag=Tag::findOne(['url'=>$url]);
+        if(isset($tag)){
+            $tagId=$tag->id;
+        }else{
+            return false;
+        }
+        $relationshipQuery=(new Query())->select('pid')->from('relationship')->where(['cid'=>$tagId,'type'=>'tag-article']);
+        return static::find()->where(['id'=>$relationshipQuery])->all();
     }
 
     public function getAllList(){

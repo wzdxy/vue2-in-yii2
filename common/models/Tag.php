@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "tag".
@@ -13,6 +14,7 @@ use Yii;
  * @property integer $status
  * @property string $description
  * @property integer $type
+ * @property integer $count
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -47,6 +49,7 @@ class Tag extends \yii\db\ActiveRecord
             'status' => 'Status',
             'description' => 'Description',
             'type' => 'Type',
+            'count' => 'Count',
         ];
     }
 
@@ -58,7 +61,19 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     public static function getAllList(){
-        return static::find()->select(['id','name','description'])->where(['status'=>0])->asArray()->all();
+        return static::find()->select(['id','name','description','url','count'])->where(['status'=>0])->all();
+    }
+
+    public static function getTagsByArticleId($id){
+        $relationshipQuery=(new Query())->select('cid')->from('relationship')->where(['pid'=>$id,'type'=>'tag-article']);
+        return Tag::find()->where(['id'=>$relationshipQuery])->all();
+    }
+
+    public function refreshCount(){
+        $relationshipCount=Relationship::find()->where(['cid'=>$this->id,'type'=>'tag-article'])->count();
+        $this->count=$relationshipCount;
+        $this->save();
+        return $relationshipCount;
     }
 
     /**

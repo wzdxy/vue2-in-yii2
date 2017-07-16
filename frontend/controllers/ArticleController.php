@@ -10,18 +10,14 @@ use yii\db\Query;
  */
 class ArticleController extends FrontController
 {
-    public function actions(){
-        $actions=parent::actions();
-        unset($actions['index']);
-        return $actions;
-    }
-
     public function actionIndex()
     {
         $id=Yii::$app->request->get('id');
+        if(!isset($id)){
+            return Yii::$app->runAction('catalog/index');
+        }
         $articleQuery=Article::findOne($id);
-        $relationshipQuery=(new Query())->select('cid')->from('relationship')->where(['pid'=>$id]);
-        $tagQuery=Tag::find()->where(['id'=>$relationshipQuery])->all();
+        $tagQuery=Tag::getTagsByArticleId($id);
         return $this->render('index',[
             'article'=>$articleQuery,
             'tags'=>$tagQuery
