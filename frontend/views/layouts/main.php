@@ -24,32 +24,35 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<div class="navbar-fixed"><nav>
-    <div class="nav-wrapper  light-blue accent-4">
-        <a href="/" class="brand-logo">BLOG</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/">Home</a></li>
-            <li><a href="/catalog">Catalog</a></li>
-            <li><a href="/tag">Tag</a></li>
-            <li><a href="/site/about">About</a></li>
-            <li><a href="/site/contact">Contact</a></li>
-        </ul>
-    </div>
-</nav></div>
+<div class="navbar-fixed" style="z-index: 999;">
+    <nav>
+        <div class="nav-wrapper  light-blue accent-4">
+            <a href="/" class="brand-logo">BLOG</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/">Home</a></li>
+                <li><a href="/catalog">Catalog</a></li>
+                <li><a href="/tag">Tag</a></li>
+                <li><a href="/site/about">About</a></li>
+                <li><a href="/site/contact">Contact</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="/">Home</a></li>
+                <li><a href="/catalog">Catalog</a></li>
+                <li><a href="/tag">Tag</a></li>
+                <li><a href="/site/about">About</a></li>
+                <li><a href="/site/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
 <main class="wrap">
     <div class="container">
         <?= $content ?>
     </div>
 </main>
 
-<footer class="page-footer light-blue accent-4" style="padding-top: 0;">
-    <div class="footer-copyright">
-        <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-    </div>
-</footer>
+
 
 <?php $this->endBody() ?>
 </body>

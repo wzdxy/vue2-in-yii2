@@ -1,12 +1,11 @@
 html,
-body {
-    /*height: 100%;*/
-}
+
 
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 main {
@@ -15,4 +14,14 @@ main {
 
 code{
     font-family:Consolas;
+}
+@media screen and (min-aspect-ratio: 1/1) {
+    body {
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    .wrap{
+        max-height: calc(100vh - 65px);
+        overflow-y: auto;
+    }
 }

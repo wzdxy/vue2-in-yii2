@@ -27,8 +27,8 @@ class m170503_160551_create_article_table extends Migration
             'type'=>$this->string(),
             'tag'=>$this->string(),
             'status'=>$this->integer(),
-            'created_at'=>$this->timestamp(),
-            'updated_at'=>$this->timestamp()->defaultExpression('0 ON UPDATE CURRENT_TIMESTAMP'),
+            'created_at'=>$this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at'=>$this->timestamp()->defaultExpression('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             'url'=>$this->string()
         ],$tableOptions);
     }
