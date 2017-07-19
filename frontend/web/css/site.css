@@ -2,19 +2,22 @@ html,
 
 
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    overflow-x: hidden;
+    /*display: flex;*/
+    /*min-height: 100vh;*/
+    /*flex-direction: column;*/
+    /*overflow-x: hidden;*/
 }
 
 main {
-    flex: 1 0 auto;
+    /*flex: 1 0 auto;*/
 }
 
 code{
     font-family:Consolas;
 }
+
+
+/* PC 横屏 */
 @media screen and (min-aspect-ratio: 1/1) {
     body {
         max-height: 100vh;
@@ -23,5 +26,11 @@ code{
     .wrap{
         max-height: calc(100vh - 65px);
         overflow-y: auto;
+    }
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+    html{
+        /*height: 100vh;*/
     }
 }

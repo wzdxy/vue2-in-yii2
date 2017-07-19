@@ -24,7 +24,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<div class="navbar-fixed" style="z-index: 999;">
+<!--<div class="navbar-fixed" style="z-index: 999;">-->
     <nav>
         <div class="nav-wrapper  light-blue accent-4">
             <a href="/" class="brand-logo">BLOG</a>
@@ -45,7 +45,7 @@ AppAsset::register($this);
             </ul>
         </div>
     </nav>
-</div>
+<!--</div>-->
 <main class="wrap">
     <div class="container">
         <?= $content ?>

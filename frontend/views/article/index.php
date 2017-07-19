@@ -7,24 +7,41 @@ $this->title = $article->title;
 ?>
 <div style="padding-top: 5px">
     <article class="row">
-        <header class="col s11"><h1><?=$article->title?></h1></header>
+
         <section class="article-content col s12">
-            <div class="card blue-grey darken-1">
-                <div class="card-action">
-                        <span class="tag-box">
-                            <?php foreach ($tags as $tag){?>
-                                <a class="tag-item btn" href="/tag/<?=$tag->url?>">
-                                    <i class="fa fa-tag fa-1" aria-hidden="true"></i>
-                                    <span><?=$tag->name?></span>
-                                </a>
-                            <?php }?>
+            <div class="card sticky-action">
+                <div class="card-image waves-effect waves-block waves-light" style="max-height: 30vh;">
+                    <img class="activator" src="/images/1.jpg">
+                </div>
+                <div class="card-content">
+                    <header class="card-title">
+                        <h3 style="margin-top: 0;"><?=$article->title?></h3>
+                        <span class="article-info col m3 s12" style="text-align: right;">
+                            <a style="float: left;"><?=$article->author_name?></a>
+                            <a ><?=$article->created_at?></a>
                         </span>
-                    <a ><?=$article->author_name?></a> <a ><?=$article->created_at?></a>
+                        <span class="tag-box col m9 s12 ">
+                        <?php foreach ($tags as $tag){?>
+                            <a class="tag-item btn" href="/tag/<?=$tag->url?>">
+                                <i class="fa fa-tag fa-1" aria-hidden="true"></i>
+                                <span><?=$tag->name?></span>
+                            </a>
+                        <?php }?>
+                    </span>
+                    </header>
+
+
+
+                </div>
+                <div class="card-content">
+                    <?=$article->html?>
+
+                </div>
+                <div class="card-reveal" style="display: none; transform: translateY(0px);">
+                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
                 </div>
 
-                <div class="card-content white-text">
-                    <?=$article->html?>
-                </div>
             </div>
         </section>
         <div class="send-review col s12">
@@ -50,7 +67,7 @@ $this->title = $article->title;
                 </form>
             </div>
         </div>
-        <section class="user-reviews">
+        <section class="user-reviews col s12" style="height: 400px;">
 
         </section>
     </article>
