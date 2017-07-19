@@ -36,33 +36,30 @@ $this->title = $article->title;
                 <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                 <p>Here is some more information about this product that is only revealed once clicked on.</p>
             </div>
-
         </div>
     </section>
     <div class="send-review col s12">
-        <div class="card">
-            <form id="review-form" onsubmit="return false;" class="">
-                <div class="input-field col m3 s12">
-                    <input name="name" type="text" class="validate" value="zz">
-                    <label for="name">Name</label>
-                </div>
-                <div class="input-field col m5 s12">
-                    <input name="email" type="email" class="validate" value="i@zchi.me">
-                    <label for="email" data-error="Please input a correct email">Email</label>
-                </div>
-                <div class="input-field col m4 s12">
-                    <input name="blog" type="text" class="validate">
-                    <label for="blog" data-error="Please input a correct URL">Blog</label>
-                </div>
-                <div class="input-field col m12 s12">
-                    <textarea name="content" class="materialize-textarea">ddw</textarea>
-                    <label for="content">Content</label>
-                </div>
-                <button id="comment-sumbit-btn" onclick="commentSubmit();this.setAttribute('disabled','disabled')" class="btn waves-effect waves-light col m2 offset-m5 s6 offset-s3" type="submit" name="action">Submit</button>
-            </form>
-        </div>
+        <form id="review-form" onsubmit="return false;" class="col s12">
+            <div class="input-field col m3 s12">
+                <input name="name" type="text" class="validate">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field col m5 s12">
+                <input name="email" type="email" class="validate">
+                <label for="email" data-error="Please input a correct email">Email</label>
+            </div>
+            <div class="input-field col m4 s12">
+                <input name="blog" type="text" class="validate">
+                <label for="blog" data-error="Please input a correct URL">Blog</label>
+            </div>
+            <div class="input-field col m12 s12">
+                <textarea name="content" class="materialize-textarea"></textarea>
+                <label for="content">Content</label>
+            </div>
+            <button id="comment-sumbit-btn" onclick="commentSubmit();" class="btn waves-effect waves-light col m2 offset-m5 s6 offset-s3" type="submit" name="action">Submit</button>
+        </form>
     </div>
-    <section class="user-reviews col s12" style="height: 400px;">
+    <section class="user-reviews col s12" style="height: 200px;">
 
     </section>
 </article>
