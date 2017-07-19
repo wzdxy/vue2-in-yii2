@@ -4,9 +4,9 @@
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index" style="padding-top: 5px">
+<div class="site-index content-center" style="padding-top: 5px">
 
-    <div class="jumbotron">
+    <div class="jumbotron" style="padding-left: 12px;">
         <h1>SITE</h1>
 
         <p class="lead">You have successfully created your vue2 in yii2 application.</p>

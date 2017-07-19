@@ -18,7 +18,7 @@ code{
 
 
 /* PC 横屏 */
-@media screen and (min-aspect-ratio: 1/1) {
+@media screen and (min-device-width: 992px) {
     body {
         max-height: 100vh;
         overflow: hidden;
@@ -26,6 +26,14 @@ code{
     .wrap{
         max-height: calc(100vh - 65px);
         overflow-y: auto;
+    }
+    .wrap>.content-center{
+        width: 70%;
+        margin: 0 auto;
+    }
+    article{
+        /*width: 70%;*/
+        /*margin: 0 auto;*/
     }
 }
 

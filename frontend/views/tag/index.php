@@ -4,8 +4,8 @@
 
 $this->title = '目录';
 ?>
-<div class="site-index" style="padding-top: 5px">
-    <div class="">
+<div class="content-center row" style="padding-top: 5px">
+    <div class="col s12 m12">
         <h2><?=isset($tag)?$tag->name:''?></h2>
         <div class="collection">
             <?php if($articles!==false && count($articles)>0) {?>

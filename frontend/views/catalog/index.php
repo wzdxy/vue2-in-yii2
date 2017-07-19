@@ -4,7 +4,7 @@
 
 $this->title = '目录';
 ?>
-<div class="site-index" style="padding-top: 5px">
+<div class="content-center" style="padding-top: 5px">
     <div class="">
         <h1>Catalog</h1>
         <?php foreach ($list as $article){?>

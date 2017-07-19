@@ -4,8 +4,8 @@
 
 $this->title = 'Tags';
 ?>
-<div class="site-index" style="padding-top: 5px">
-    <div class="">
+<div class="content-center row" style="padding-top: 5px">
+    <div class="col s12 m12">
         <h1>All Tags</h1>
         <div class="collection">
             <?php foreach ($tags as $idx=>$tag){?>
