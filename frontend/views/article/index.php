@@ -56,6 +56,7 @@ $this->title = $article->title;
                 <textarea name="content" class="materialize-textarea"></textarea>
                 <label for="content">Content</label>
             </div>
+            <input name="article_id" type="text" style="display: none" disabled value="<?=$article->id?>">
             <button id="comment-sumbit-btn" onclick="commentSubmit();" class="btn waves-effect waves-light col m2 offset-m5 s6 offset-s3" type="submit" name="action">Submit</button>
         </form>
     </div>

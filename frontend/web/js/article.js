@@ -20,9 +20,7 @@ function commentSubmit(btn) {
             console.log(err);
         }})
     }else {
-        // $submitBtn.removeAttr('disabled');
-        $('#comment-sumbit-btn').removeAttr('disabled');
-        console.log(1);
+        $submitBtn.removeAttr('disabled');
     }
 }
 
