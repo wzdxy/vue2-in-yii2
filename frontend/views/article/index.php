@@ -41,22 +41,23 @@ $this->title = $article->title;
     <div class="send-review col s12">
         <form id="review-form" onsubmit="return false;" class="col s12">
             <div class="input-field col m3 s12">
-                <input name="name" type="text" class="validate">
-                <label for="name">Name</label>
+                <input name="author_name" type="text" class="validate">
+                <label for="author_name">Name</label>
             </div>
             <div class="input-field col m5 s12">
-                <input name="email" type="email" class="validate">
-                <label for="email" data-error="Please input a correct email">Email</label>
+                <input name="author_email" type="email" class="validate">
+                <label for="author_email" data-error="Please input a correct email">Email</label>
             </div>
             <div class="input-field col m4 s12">
-                <input name="blog" type="text" class="validate">
-                <label for="blog" data-error="Please input a correct URL">Blog</label>
+                <input name="author_blog" type="text" class="validate">
+                <label for="author_blog" data-error="Please input a correct URL">Blog</label>
             </div>
             <div class="input-field col m12 s12">
-                <textarea name="content" class="materialize-textarea"></textarea>
-                <label for="content">Content</label>
+                <textarea name="text" class="materialize-textarea"></textarea>
+                <label for="text">Content</label>
             </div>
-            <input name="article_id" type="text" style="display: none" disabled value="<?=$article->id?>">
+            <input name="article_id" type="hidden" value="<?=$article->id?>">
+            <input name="<?= Yii::$app->request->csrfParam; ?>" type="hidden"  value="<?=Yii::$app->request->getCsrfToken()?>" />
             <button id="comment-sumbit-btn" onclick="commentSubmit();" class="btn waves-effect waves-light col m2 offset-m5 s6 offset-s3" type="submit" name="action">Submit</button>
         </form>
     </div>

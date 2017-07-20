@@ -1,43 +1,42 @@
 Vue2 in Yii2
 ===============================
 1. init project
-```bash
-composer install
-bower install
-init
-yii migrate
-cd vue2
-npm install
+    ```bash
+    composer install
+    bower install
+    (php) init
+    (php) yii migrate
+    cd vue2
+    npm install
+    
+    #for build to yii, will distribute to vue2-in-yii2\backend\web\dist (or frontend\web\dist)
+    #blog URL:f.localhost
+    #admin URL:b.localhost:82/#/signup
+    npm run build-module admin
+    npm run build-module home
+    
+    #for debug, preview at localhost:8091/views/admin.html (or views/home.html)
+    npm run dev
+    ```
 
-#for build to yii, will distribute to vue2-in-yii2\backend\web\dist (or frontend\web\dist)
-#blog URL:f.localhost
-#admin URL:b.localhost:82/#/signup
-npm run build-module admin
-npm run build-module home
-
-#for debug, preview at localhost:8091/views/admin.html (or views/home.html)
-npm run dev
-
-
-```
 2. apache config
-```ini
-<VirtualHost *:80>	#vue2-in-yii2\backend
-    ServerAdmin webmaster@example.com
-    DocumentRoot "{YOUR PROJECT DIR}\backend\web"
-    ServerName b.localhost
-    ErrorLog "logs/backend-error.log"
-    CustomLog "logs/backend-access.log" common
-</VirtualHost>
-
-<VirtualHost *:80>	#vue2-in-yii2\frontend
-    ServerAdmin webmaster@.example.com
-    DocumentRoot "{YOUR PROJECT DIR}\frontend\web"
-    ServerName f.localhost
-    ErrorLog "logs/frontend-error.log"
-    CustomLog "logs/frontend-access.log" common
-</VirtualHost>
-```
+    ```ini
+    <VirtualHost *:80>	#vue2-in-yii2\backend
+        ServerAdmin webmaster@example.com
+        DocumentRoot "{YOUR PROJECT DIR}\backend\web"
+        ServerName b.localhost
+        ErrorLog "logs/backend-error.log"
+        CustomLog "logs/backend-access.log" common
+    </VirtualHost>
+    
+    <VirtualHost *:80>	#vue2-in-yii2\frontend
+        ServerAdmin webmaster@.example.com
+        DocumentRoot "{YOUR PROJECT DIR}\frontend\web"
+        ServerName f.localhost
+        ErrorLog "logs/frontend-error.log"
+        CustomLog "logs/frontend-access.log" common
+    </VirtualHost>
+    ```
 3. Demo:
     
      - my new blog : [test.zchi.me](http:test.zchi.me)

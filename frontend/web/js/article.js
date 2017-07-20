@@ -6,26 +6,31 @@ $(function () {
 });
 
 function commentSubmit(btn) {
+    const timeout=3000;
     let $submitBtn=$('#comment-sumbit-btn').attr('disabled','disabled');
-    let commentFormData=$('#review-form').serializeJSON();
+    let $form=$('#review-form');
+    let commentFormData=$form.serializeJSON();
     if(validate(commentFormData)){
         $.ajax({'url':'/comment/add',method:'post',dataType:'json',data:commentFormData,success:function (res) {
             $submitBtn.removeAttr('disabled');
-            if(res.result===0)alert('ok');
-            else {
-
+            if(res.result===0){
+                $form[0].reset();
+                Materialize.toast('reviewed success', timeout)
+            }else {
+                Materialize.toast(res.message, timeout)
             }
         },error:function (err) {
             $submitBtn.removeAttr('disabled');
-            console.log(err);
+            Materialize.toast(err.toString(), timeout)
         }})
     }else {
         $submitBtn.removeAttr('disabled');
+        Materialize.toast('input invalid', timeout)
     }
 }
 
 function validate(commentFormData) {
-    return !!(commentFormData.name && commentFormData.email && commentFormData.content);
+    return !!(commentFormData.author_name && commentFormData.author_email && commentFormData.text);
 }
 
 function commentValidateInit() {
