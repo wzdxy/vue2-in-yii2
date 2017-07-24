@@ -1,5 +1,6 @@
-html,
-
+html {
+    font-family: Arial,sans-serif,Consolas,GillSans, Calibri, Trebuchet;
+}
 
 body {
     /*display: flex;*/
@@ -13,7 +14,7 @@ main {
 }
 
 code{
-    font-family:Consolas;
+    font-family:Consolas, sans-serif;
 }
 
 

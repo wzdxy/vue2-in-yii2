@@ -3,7 +3,8 @@
  */
 $(function () {
     initNavBar();
-    // srf();
+    parallax();
+
 });
 
 function initNavBar() {
@@ -11,14 +12,6 @@ function initNavBar() {
 }
 
 
-function srf() {
-    if (/Android/gi.test(navigator.userAgent)) {
-        window.addEventListener('resize', function () {
-            if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
-                window.setTimeout(function () {
-                    document.activeElement.scrollIntoViewIfNeeded();
-                }, 0);
-            }
-        })
-    }
+function parallax() {
+    $('.parallax').parallax();
 }
