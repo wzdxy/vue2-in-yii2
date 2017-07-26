@@ -13,6 +13,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'iconfont\material-icons.css'
     ];
     public $js = [
         'js/main.js',

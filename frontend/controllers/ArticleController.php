@@ -1,5 +1,6 @@
 <?php
 namespace frontend\controllers;
+use common\models\Comment;
 use common\models\Tag;
 use Yii;
 use common\models\Article;
@@ -18,9 +19,11 @@ class ArticleController extends FrontController
         }
         $articleQuery=Article::findOne($id);
         $tagQuery=Tag::getTagsByArticleId($id);
+        $commentQuery=Comment::getByArticleId($id);
         return $this->render('index',[
             'article'=>$articleQuery,
-            'tags'=>$tagQuery
+            'tags'=>$tagQuery,
+            'comments'=>$commentQuery
         ]);
     }
 }

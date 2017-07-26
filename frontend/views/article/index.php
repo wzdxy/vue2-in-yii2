@@ -38,7 +38,7 @@ $this->title = $article->title;
             </div>
         </div>
     </section>
-    <div class="send-review col s12">
+    <div class="send-review col s12" style="padding-bottom: 20px;">
         <form id="review-form" onsubmit="return false;" class="col s12">
             <div class="input-field col m3 s12">
                 <input name="author_name" type="text" class="validate">
@@ -61,7 +61,21 @@ $this->title = $article->title;
             <button id="comment-sumbit-btn" onclick="commentSubmit();" class="btn waves-effect waves-light col m2 offset-m5 s6 offset-s3" type="submit" name="action">Submit</button>
         </form>
     </div>
-    <section class="user-reviews col s12" style="height: 200px;">
+    <section class="user-reviews col s12">
+        <?php foreach ($comments as $comment){ ?>
+            <div class="card">
+                <div class="card-content">
+                    <p><a target="_blank" <?=$comment->author_blog?'href=http://'.$comment->author_blog:''?>><?= $comment->author_name ?></a> :</p>
+                    <span class="card-title"></span>
+                    <p><?= $comment->text ?></p>
+                </div>
+                <div class="card-action">
+                    <a href="#" type="button"><i class="material-icons">reply</i></a>
+                    <a href="#" type="button"><i class="material-icons">thumb_up</i></a>
+                    <a href="#"><i class="material-icons">thumb_down</i></a>
+                </div>
+            </div>
+        <?php } ?>
 
     </section>
 </article>

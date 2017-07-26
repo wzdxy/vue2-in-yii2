@@ -5,6 +5,7 @@ use common\models\Article;
 use common\models\Comment;
 use common\models\Relationship;
 use Yii;
+use yii\db\Transaction;
 
 /**
  * Site controller
@@ -24,9 +25,11 @@ class CommentController extends FrontController
             return json_encode(['result'=>-2,'message'=>'you had reviewed too many , have a rest']);
         };
         $articleId=$post['article_id'];
-        if(Article::find()->where(['id'=>$articleId])->count()===0)return json_encode(['result'=>-1,'message'=>'article is not exist']);
+        $articleModel=Article::findOne($post['article_id']);// new Article(['id'=>intval($post['article_id'])]);
+        if($articleModel===null)return json_encode(['result'=>-1,'message'=>'article is not exist']);
         if($model->load($post,'') && $model->save()){
-            (new Relationship(['cid'=>$articleId,'pid'=>$model->id,'type'=>'comment-article']))->save();
+            (new Relationship(['cid'=>$model->id,'pid'=>$articleId,'type'=>'comment-article']))->save();
+            $articleModel->countComments();
             return json_encode(['result'=>0]);
         }else{
             return var_dump($model->errors);

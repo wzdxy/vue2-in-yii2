@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 use yii\db\Query;
 
 /**
@@ -20,8 +21,9 @@ use yii\db\Query;
  * @property string $created_at
  * @property string $updated_at
  * @property string $url
+ * @property string $comment_count
  */
-class Article extends \yii\db\ActiveRecord
+class Article extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -62,6 +64,7 @@ class Article extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'url' => 'Url',
+            'comment_count' => 'Comment Count',
         ];
     }
 
@@ -108,6 +111,18 @@ class Article extends \yii\db\ActiveRecord
             return 0;
         }
     }
+
+    /**
+     * update comment_count column
+     * @return int|string
+     */
+    public function countComments(){
+        $count=Relationship::find()->where(['type'=>'comment-article','pid'=>$this->id])->count();
+        $this->comment_count=$count;
+        $r=$this->save();
+        return $count;
+    }
+
 
 
 
