@@ -21,8 +21,10 @@
                     <mu-td>{{item.created_at }}</mu-td>
                 </mu-tr>
             </mu-tbody>
-
         </mu-table>
+        <mu-dialog :open="loading" title="加载中 - -">
+            <p><mu-circular-progress :size="40"/></p>
+        </mu-dialog>
     </div>
 </template>
 
@@ -32,19 +34,34 @@
         data(){
             return {
                 isActive: true, hasError: true,
-                userList: []
+                userList: [],
+                loading:false,
             }
         },
-        beforeRouteEnter(to,from,next){
-            let This=this;
-            vm.$http.get('/user/list').then(function (res) {
-                next((vm)=>{
+        methods:{
+            getUserList(){
+                this.loading=true;
+                this.$http.get('/user/list').then(function (res) {
+                    this.loading=false;
                     if(res.data.result===0){
-                        vm.userList=res.data.list;
+                        this.userList=res.data.list;
                     }
-                });
-            });
-        }
+                }.bind(this));
+            }
+        },
+        created(){
+            this.getUserList();
+        },
+//        beforeRouteEnter(to,from,next){
+//            let This=this;
+//            vm.$http.get('/user/list').then(function (res) {
+//                next((vm)=>{
+//                    if(res.data.result===0){
+//                        vm.userList=res.data.list;
+//                    }
+//                });
+//            });
+//        }
     }
 </script>
 

@@ -26,8 +26,12 @@
             </mu-tbody>
         </mu-table>
         <div v-if="isEditing" class="edit-container" >
-            <article-editor action="add" :md="editingMd" :title="editingTitle"></article-editor>
+            <mu-raised-button label="Cancel" class="demo-raised-button" @click="exitEditing"/>
+            <article-editor action="edit" :md.sync="editingMd" :title="editingTitle"></article-editor>
         </div>
+        <mu-dialog :open="loading" title="加载中 - -">
+            <p><mu-circular-progress :size="40"/></p>
+        </mu-dialog>
     </div>
 </template>
 
@@ -38,6 +42,7 @@
         data(){
             return {
                 isActive: true, hasError: true,
+                loading:false,
                 articleList:[
                     {title:'N1',author_name:'LL'},
                     {title:'N1',author_name:'LL'},
@@ -54,28 +59,36 @@
             },
             editArticle:function(id,title){
                 event.stopPropagation();
-                this.isEditing=true;
                 this.editingTitle=title;
+                this.loading=true;
                 vm.$http.get('/article/text?id='+id).then(function (res) {
+                    this.loading=false;
                     if(res.data.result===0){
                         this.editingMd=res.data.content;
+                        this.isEditing=true;
                     }else{
                         this.isEditing=false;
                         alert(JSON.stringify(res));
                     }
 
-                }.bind(this))
+                }.bind(this));
+
             },
-        },
-        beforeRouteEnter(to,from,next){
-            let This=this;
-            vm.$http.get('/article/list').then(function (res) {
-                next((vm)=>{
+            exitEditing(){
+                this.isEditing=false;
+            },
+            getArticleList(){
+                this.loading=true;
+                this.$http.get('/article/list').then(function (res) {
+                    this.loading=false;
                     if(res.data.result===0){
-                        vm.articleList=res.data.list;
+                        this.articleList=res.data.list;
                     }
-                });
-            });
+                }.bind(this));
+            }
+        },
+        created(){
+            this.getArticleList();
         },
         components:{
             'article-editor':articleEditor

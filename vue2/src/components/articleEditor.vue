@@ -55,7 +55,6 @@
                 }
             }
         },
-//        props:['action','md','title','tag'],
         props:{
             action: {type:String,default:''},
             md: {type:String,default:''},
