@@ -95,6 +95,19 @@ class Article extends ActiveRecord
         }
     }
 
+    public function edit($title,$text,$html,$tags)
+    {
+        $this->title=$title;
+        $this->text=$text;
+        $this->html=$html;
+        if($this->save()){
+            //TODO update tags
+            return 0;
+        }else{
+            return json_encode($this->errors);
+        }
+    }
+
     public function addTags($tags){
         if(is_array($tags)){
             foreach ($tags as $tag){

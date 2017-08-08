@@ -23,6 +23,23 @@ class ArticleController extends BackendController
         }
     }
 
+    public function actionUpdate(){
+        $post=Yii::$app->request->post();
+        $articleId=$post['id'];
+        $text=$post['md'];
+        $title=$post['title'];
+        $html=$post['html'];
+        $tag=json_decode($post['tag']);
+        $modal=Article::findOne($articleId);
+        if($modal===null)return json_encode(['result'=>-2,'message'=>'This article is not exist']);
+        $result=$modal->edit($title,$text,$html,$tag);
+        if($result===0){
+            return json_encode(['result'=>0,'message'=>'Update Success']);
+        }else{
+            return json_encode(['result'=>-1,'message'=>$result]);
+        }
+    }
+
     public function actionList(){
         $modal=new Article();
         $List=$modal->getAllList();

@@ -27,9 +27,9 @@
         </mu-table>
         <div v-if="isEditing" class="edit-container" >
             <mu-raised-button label="Cancel" class="demo-raised-button" @click="exitEditing"/>
-            <article-editor action="edit" :md.sync="editingMd" :title="editingTitle"></article-editor>
+            <article-editor action="edit" :id="editingId" :md.sync="editingMd" :title="editingTitle"></article-editor>
         </div>
-        <mu-dialog :open="loading" title="加载中 - -">
+        <mu-dialog :open="isLoading" title="加载中 - -">
             <p><mu-circular-progress :size="40"/></p>
         </mu-dialog>
     </div>
@@ -42,12 +42,13 @@
         data(){
             return {
                 isActive: true, hasError: true,
-                loading:false,
+                isLoading:false,
                 articleList:[
                     {title:'N1',author_name:'LL'},
                     {title:'N1',author_name:'LL'},
                 ],
                 isEditing:false,
+                editingId:-1,
                 editingMd:'',
                 editingTitle:'',
             }
@@ -60,9 +61,10 @@
             editArticle:function(id,title){
                 event.stopPropagation();
                 this.editingTitle=title;
-                this.loading=true;
+                this.editingId=id;
+                this.isLoading=true;
                 vm.$http.get('/article/text?id='+id).then(function (res) {
-                    this.loading=false;
+                    this.isLoading=false;
                     if(res.data.result===0){
                         this.editingMd=res.data.content;
                         this.isEditing=true;
@@ -78,9 +80,9 @@
                 this.isEditing=false;
             },
             getArticleList(){
-                this.loading=true;
+                this.isLoading=true;
                 this.$http.get('/article/list').then(function (res) {
-                    this.loading=false;
+                    this.isLoading=false;
                     if(res.data.result===0){
                         this.articleList=res.data.list;
                     }

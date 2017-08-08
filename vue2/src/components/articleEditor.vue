@@ -7,7 +7,8 @@
 
         <tag-editor  :selectedTags.sync="prop_tag"></tag-editor> <!--v-model="tag"-->
 
-        <mu-raised-button  v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading"/>
+        <mu-raised-button  v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading && action=='add'"/>
+        <mu-raised-button  v-on:click="update" label="Update" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading && action=='edit'"/>
         <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right" class="loading-circular"/>
         <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
     </div>
@@ -57,11 +58,15 @@
         },
         props:{
             action: {type:String,default:''},
+            id:{type:String,default:-1},
             md: {type:String,default:''},
             title: {type:String,default:''},
             tag:{type:Array,default:()=>[]}
         },
         methods:{
+            /**
+             * 发布新文章
+             */
             publish:function () {
                 if(this.prop_title==='' || this.prop_md==='')return;
                 this.loading=true;
@@ -81,6 +86,34 @@
                     }
                     this.open('top');
                 }.bind(this))
+            },
+            /**
+             * 更新文章
+             */
+            update(){
+                if(this.prop_title==='' || this.prop_md==='')return;
+                this.loading=true;
+                this.$http.post('/article/update',this.$qs.stringify({
+                        id:this.id,
+                        title:this.prop_title,
+                        md:this.prop_md,
+                        html:this.html,
+                        tag:JSON.stringify(this.prop_tag)||''
+                    })
+                ).then(function (res) {
+                    this.loading=false;
+                    if(res&&res.data.result===0){
+                        this.msg='Update Success';
+                        this.initEditor(); //TODO emit 到父级以隐藏编辑区
+                    }else{
+                        this.msg=res.data.message;
+                    }
+                    this.open('top');
+                }.bind(this)).catch(function (err) {
+                    this.loading=false;
+                    this.msg='Update Failed';
+                    this.open('top');
+                }.bind(this));
             },
             /**
              * 清空编辑器
