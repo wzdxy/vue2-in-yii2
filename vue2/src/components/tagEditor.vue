@@ -60,9 +60,6 @@
                 let This=this;
                 return this.existTags.filter(function (item) {return item.name===This.newTagInput;}).length>0;
             },
-//            selectedTags:function () {
-//                return this.value;
-//            }
         },
         /**
          * 获取已存在的Tags

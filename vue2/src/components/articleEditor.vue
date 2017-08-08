@@ -1,15 +1,22 @@
 <template>
     <div id="article-editor">
-        <h2 style="padding-left: 30px;">{{action.toUpperCase()}}</h2>
-        <mu-text-field v-model="prop_title" hintText="标题" type="text" icon="title" fullWidth /><br/>
+        <!--<h2 style="padding-left: 30px;">-->
+            <!--{{action.toUpperCase()}}-->
+            <!--<br/>-->
+        <!--</h2>-->
 
+        <mu-text-field v-model="prop_title" hintText="标题" type="text" icon="title" style="width: 80%;"/>
         <mavon-editor v-model="prop_md" v-on:change="editorChange" v-bind:toolbars="toolbars" :ishljs="false"/>
 
-        <tag-editor  :selectedTags.sync="prop_tag"></tag-editor> <!--v-model="tag"-->
+        <div class="btn-group" style="float: right;padding: 20px;">
+            <mu-raised-button  v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading && action=='add'"/>
+            <mu-raised-button  v-on:click="update" label="Update" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading && action=='edit'"/>
+            <mu-raised-button  v-on:click="exitEditor" label="Cancel" class="demo-raised-button"  v-if="!loading && action=='edit'"/>
+            <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right" class="loading-circular"/>
+        </div>
+        <tag-editor  :selectedTags.sync="prop_tag" style="float: right;"></tag-editor>
 
-        <mu-raised-button  v-on:click="publish" label="Publish" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading && action=='add'"/>
-        <mu-raised-button  v-on:click="update" label="Update" slot="right" class="demo-raised-button" primary v-bind:disabled="loading||!prop_title||!prop_md" v-if="!loading && action=='edit'"/>
-        <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right" class="loading-circular"/>
+
         <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
     </div>
 </template>
@@ -58,7 +65,7 @@
         },
         props:{
             action: {type:String,default:''},
-            id:{type:String,default:-1},
+            id:{type:Number,default:-1},
             md: {type:String,default:''},
             title: {type:String,default:''},
             tag:{type:Array,default:()=>[]}
@@ -104,6 +111,7 @@
                     this.loading=false;
                     if(res&&res.data.result===0){
                         this.msg='Update Success';
+                        this.$emit('exit');
                         this.initEditor(); //TODO emit 到父级以隐藏编辑区
                     }else{
                         this.msg=res.data.message;
@@ -122,6 +130,9 @@
                 this.prop_md='';
                 this.prop_title='';
                 this.prop_tag=[]
+            },
+            exitEditor:function () {
+                this.$emit('exit');
             },
             open (position) {
                 this[position + 'Popup'] = true
@@ -157,14 +168,14 @@
             'tag-editor':tagEditor, 'mavon-editor': mavonEditor.mavonEditor
         },
         mounted:function () {
-            console.log(vm);
+
         }
     }
 </script>
 
 <style>
     .demo-raised-button,.loading-circular{
-        position: absolute;
-        left: calc(50% - 45px);
+        /*position: absolute;*/
+        /*left: calc(50% - 45px);*/
     }
 </style>

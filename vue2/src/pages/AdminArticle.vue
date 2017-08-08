@@ -1,8 +1,7 @@
 <template>
     <div id="AdminArticle">
-        <h2 style="padding-left: 30px;">Article</h2>
-        <mu-table :enableSelectAll="true" :multiSelectable="true"
-                  :selectable="true" :showCheckbox="true">
+        <h2 v-show="!isEditing" style="padding-left: 30px;">Article</h2>
+        <mu-table v-show="!isEditing" :enableSelectAll="true" :multiSelectable="true" :selectable="true" :showCheckbox="true">
             <mu-thead slot="header">
                 <mu-tr>
                     <mu-th tooltip="ID">Index</mu-th>
@@ -25,9 +24,8 @@
                 </mu-tr>
             </mu-tbody>
         </mu-table>
-        <div v-if="isEditing" class="edit-container" >
-            <mu-raised-button label="Cancel" class="demo-raised-button" @click="exitEditing"/>
-            <article-editor action="edit" :id="editingId" :md.sync="editingMd" :title="editingTitle"></article-editor>
+        <div v-if="isEditing" class="edit-container" style="overflow:auto;">
+            <article-editor action="edit" :id="editingId" :md.sync="editingMd" :title="editingTitle" v-on:exit="exitEditing"></article-editor>
         </div>
         <mu-dialog :open="isLoading" title="加载中 - -">
             <p><mu-circular-progress :size="40"/></p>
@@ -102,7 +100,7 @@
     .edit-container{
         position: fixed;
         background-color: #fff;
-        top: 80px;
+        top: 60px;
         bottom: 0;
         left: 0;
         right: 0;
