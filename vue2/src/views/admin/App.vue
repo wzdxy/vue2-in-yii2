@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <admin-head></admin-head>
-        <router-view></router-view>
+        <admin-head v-on:drawerToggle="toggle"></admin-head>
+        <router-view style="transition: all .45s cubic-bezier(.23,1,.32,1)" v-bind:style="{'margin-left':routerMarginLeft}"></router-view>
     </div>
 </template>
 
@@ -10,12 +10,16 @@
         name: 'app',
         data(){
             return {
-                isActive: true, hasError: true
+                isActive: true, hasError: true,
+                drawerOpen:true
             }
         },
         computed: {
             loginState: function () {
                 return this.$store.state.user.log;
+            },
+            routerMarginLeft:function () {
+                return this.drawerOpen && this.loginState?'260px':'0px';
             }
         },
         methods:{
@@ -26,6 +30,9 @@
                 }else{
                     this.$store.commit('login');
                 }
+            },
+            toggle(open){
+                this.drawerOpen=open;
             }
         }
     }

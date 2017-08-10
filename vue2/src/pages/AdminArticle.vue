@@ -98,7 +98,6 @@
 
 <style>
     .edit-container{
-        position: fixed;
         background-color: #fff;
         top: 60px;
         bottom: 0;

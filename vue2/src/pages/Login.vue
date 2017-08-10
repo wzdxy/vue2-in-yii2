@@ -46,7 +46,7 @@
                         window.localStorage.token_key=res.data.token;
                         window.localStorage.user_id=this.id;
                         window.localStorage.token_time=new Date().getTime()+1000*60*60;
-                        let redirect=this.$route.query.redirect||'/personalcenter';
+                        let redirect=this.$route.query.redirect||'/article';
                         this.$router.replace(redirect);
                     }else{
 
