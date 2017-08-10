@@ -5,7 +5,7 @@
         <mu-flat-button href="#/user" label="User" slot="left"/>
         <mu-flat-button href="#/login" label="Login" slot="right" v-if="!isLogin"/>
         <mu-flat-button href="#/signup" label="SignUp" slot="right" v-if="!isLogin"/>
-        <mu-flat-button href="#/personalcenter" label="PersonalCenter" slot="right" v-if="isLogin"/>
+        <mu-flat-button href="#/post" label="Post" slot="right" v-if="isLogin"/>
         <mu-flat-button color="white" label="logout" slot="right" v-on:click="logout" v-if="isLogin"/>
     </mu-appbar>
 </template>

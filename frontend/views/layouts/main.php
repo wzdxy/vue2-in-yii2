@@ -26,7 +26,7 @@ AppAsset::register($this);
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="/">Home</a></li>
-            <li><a href="/catalog">Catalog</a></li>
+            <li><a href="/article">Article</a></li>
             <li><a href="/tag">Tag</a></li>
             <li><a href="/site/about">About</a></li>
             <li><a href="/site/contact">Contact</a></li>

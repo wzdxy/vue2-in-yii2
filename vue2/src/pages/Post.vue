@@ -1,5 +1,5 @@
 <template>
-    <div id="PersonalCenter">
+    <div id="Post">
         <!--<h2>PersonalCenter</h2>-->
         <!--<p>用户名:{{user.id}}</p>-->
         <div style="padding: 10px;">

@@ -15,12 +15,14 @@ class ArticleController extends FrontController
     {
         $id=Yii::$app->request->get('id');
         if(!isset($id)){
-            return Yii::$app->runAction('catalog/index');
+            return $this->render('list',[
+                'list'=>Article::getAllHead()
+            ]);
         }
         $articleQuery=Article::findOne($id);
         $tagQuery=Tag::getTagsByArticleId($id);
         $commentQuery=Comment::getByArticleId($id);
-        return $this->render('index',[
+        return $this->render('item',[
             'article'=>$articleQuery,
             'tags'=>$tagQuery,
             'comments'=>$commentQuery

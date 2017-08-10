@@ -7,7 +7,7 @@ import Test from '@/pages/Test'
 import AdminHome from '@/pages/AdminHome'
 import AdminUser from '@/pages/AdminUser'
 import AdminArticle from '@/pages/AdminArticle'
-import PersonalCenter from '@/pages/PersonalCenter'
+import Post from '@/pages/Post'
 import Login from '@/pages/Login'
 import Signup from '@/pages/Signup'
 
@@ -45,9 +45,9 @@ export default new Router({
             },
         },
         {
-            path: '/personalcenter',
-            name: 'PersonalCenter',
-            component: PersonalCenter,
+            path: '/post',
+            name: 'post',
+            component: Post,
             meta:{
                 requireAuth:true
             }
