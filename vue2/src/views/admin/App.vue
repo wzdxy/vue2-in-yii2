@@ -19,7 +19,7 @@
                 return this.$store.state.user.log;
             },
             routerMarginLeft:function () {
-                return this.drawerOpen && this.loginState?'260px':'0px';
+                return this.drawerOpen && this.loginState?'256px':'0px';
             }
         },
         methods:{
@@ -46,7 +46,9 @@
         /*text-align: center;*/
         color: #2c3e50;
     }
-
+    html,body,#app{
+        height: 100%;
+    }
     body {
         padding: 0;
         margin: 0;

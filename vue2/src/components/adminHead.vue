@@ -10,7 +10,7 @@
                 <mu-list-item href="#/article" title="Article"/>
                 <mu-list-item href="#/user" title="User"/>
                 <mu-list-item href="#/post" title="Post"/>
-                <mu-list-item href="#/system" title="System Setting"/>
+                <mu-list-item href="#/settings" title="Settings"/>
                 <mu-list-item v-if="docked" @click.native="toggle()" title="Close"/>
             </mu-list>
         </mu-drawer>

@@ -10,7 +10,7 @@ import AdminArticle from '@/pages/AdminArticle'
 import Post from '@/pages/Post'
 import Login from '@/pages/Login'
 import Signup from '@/pages/Signup'
-import SystemSetting from '@/pages/SystemSetting'
+import Settings from '@/pages/Settings'
 
 Vue.use(Router);
 
@@ -64,9 +64,12 @@ export default new Router({
             component: Signup
         },
         {
-            path: '/system',
-            name: 'SystemSetting',
-            component: SystemSetting
+            path: '/settings',
+            name: 'Settings',
+            component: Settings,
+            meta:{
+                requireAuth:true
+            }
         }
     ]
 
