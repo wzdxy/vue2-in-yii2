@@ -19,12 +19,12 @@ Vue.component('admin-footer',Footer);
 
 Vue.prototype.$http=axios;
 Vue.prototype.$qs=qs;
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to,from,next)=>{         //路由拦截器
     if(to.meta.requireAuth){
-        // if(store.state.token){
         if(localStorage.token_key && localStorage.token_time > Date.now()){
             next();
         }else{
+            router.app.$store.commit('logout');
             next({
                 path:'/login',
                 query:{redirect:to.fullPath}

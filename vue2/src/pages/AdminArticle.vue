@@ -24,7 +24,7 @@
                 </mu-tr>
             </mu-tbody>
         </mu-table>
-        <div v-if="isEditing" class="edit-container" style="overflow:auto;">
+        <div v-if="isEditing" class="edit-container" style="overflow:auto;padding: 10px;">
             <article-editor action="edit" :id="editingId" :md.sync="editingMd" :title="editingTitle" v-on:exit="exitEditing"></article-editor>
         </div>
         <mu-dialog :open="isLoading" title="加载中 - -">

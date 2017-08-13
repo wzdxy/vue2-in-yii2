@@ -15,7 +15,7 @@
         name: 'app',
         data(){
             return {
-                title:'标题'
+                title:''
             }
         },
         computed:{
