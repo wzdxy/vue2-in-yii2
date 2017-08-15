@@ -9,6 +9,7 @@ import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-light.min.css'
 import router from  "@/router/admin"
 import Footer from  "@/components/adminFooter.vue"
+import Nav from  "@/components/adminNav.vue"
 import Head from "@/components/adminHead.vue"
 
 Vue.use(MuseUI);
@@ -16,6 +17,7 @@ Vue.use(Vuex);
 Vue.config.productionTip = false;
 Vue.component('admin-head',Head);
 Vue.component('admin-footer',Footer);
+Vue.component('admin-nav',Nav);
 
 Vue.prototype.$http=axios;
 Vue.prototype.$qs=qs;

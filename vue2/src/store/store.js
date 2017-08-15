@@ -11,6 +11,10 @@ export default new Vuex.Store({
             id: '',
             log:false
         },
+        mobileMenu:{
+            isOpen:false,
+            isSlim:false
+        }
     },
     mutations: {
         login(state, user){
@@ -25,5 +29,11 @@ export default new Vuex.Store({
                 log:false
             };
         },
+        toggleNavSlim(state){
+            state.mobileMenu.isSlim=!state.mobileMenu.isSlim;
+        },
+        toggleNavOpen(state){
+            state.mobileMenu.isOpen=!state.mobileMenu.isOpen;
+        }
     }
 })

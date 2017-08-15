@@ -1,10 +1,5 @@
 <template>
     <div id="article-editor">
-        <!--<h2 style="padding-left: 30px;">-->
-            <!--{{action.toUpperCase()}}-->
-            <!--<br/>-->
-        <!--</h2>-->
-
         <mu-text-field v-model="prop_title" hintText="标题" type="text" icon="title" style="width: 80%;"/>
         <mavon-editor v-model="prop_md" v-on:change="editorChange" v-bind:toolbars="toolbars" :ishljs="false"/>
 

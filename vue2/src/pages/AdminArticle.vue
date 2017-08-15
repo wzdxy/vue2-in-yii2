@@ -41,10 +41,7 @@
             return {
                 isActive: true, hasError: true,
                 isLoading:false,
-                articleList:[
-                    {title:'N1',author_name:'LL'},
-                    {title:'N1',author_name:'LL'},
-                ],
+                articleList:[],
                 isEditing:false,
                 editingId:-1,
                 editingMd:'',
