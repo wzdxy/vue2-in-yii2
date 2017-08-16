@@ -1,15 +1,25 @@
 <template>
     <div id="SystemSetting">
         <div class="tab-content">
-            <div v-if="bottomNav === 'personal'">
+            <div class="tab-item" v-show="bottomNav === 'personal'">
                 <h2>Personal</h2>
+                <form action="#">
+                    <mu-text-field hintText="Name" label="Name" icon="person" fullWidth labelFloat/><br/>
+                    <mu-text-field hintText="Email" label="Email" icon="email" type="email" fullWidth labelFloat/><br/>
+                    <mu-text-field hintText="Description" label="Description" icon="subject" multiLine :rows="6" :rowsMax="10" fullWidth labelFloat/><br/>
+                </form>
             </div>
 
-            <div v-if="bottomNav === 'system'">
+            <div class="tab-item" v-show="bottomNav === 'system'">
                 <h2>System</h2>
+                <form action="#">
+                    <mu-text-field hintText="Index Title" label="Index Title" icon="title" fullWidth labelFloat/><br/>
+                    <mu-text-field hintText="Index Head" label="Index Head" icon="mood" fullWidth labelFloat/><br/>
+                    <mu-text-field hintText="Page Description" label="Page Description" icon="subtitles" multiLine :rows="6" :rowsMax="10" fullWidth labelFloat/><br/>
+                </form>
             </div>
 
-            <div v-if="bottomNav === 'theme'">
+            <div class="tab-item" v-show="bottomNav === 'theme'">
                 <h2>Theme</h2>
             </div>
         </div>
@@ -43,10 +53,36 @@
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+
+</style>
 <style scoped>
     .tab-content{
         flex:1;
         overflow: auto;
+    }
+    .tab-item{
+        padding-top: 5px;
+    }
+    .tab-item h2{
+        text-align: center;
+    }
+    .tab-item form{
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .tab-item form .mu-text-field{
+        margin:0 auto;
+    }
+    @media (min-width: 480px) {
+        .tab-item form{
+            max-width:30%;
+        }
+    }
+    @media (max-width: 480px) {
+        .tab-item form{
+            max-width:90%;
+        }
     }
 </style>

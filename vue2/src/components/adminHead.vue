@@ -46,8 +46,6 @@
 </script>
 
 <style scoped>
-
-
     .head-bar{
         transition: all .45s cubic-bezier(.23,1,.32,1);width: inherit;height: 48px;
     }

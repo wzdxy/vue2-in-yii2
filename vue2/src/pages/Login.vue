@@ -6,8 +6,8 @@
             <mu-text-field @keyup.native.enter="submit" v-model="pw" label="密码" hintText="请输入密码" type="password" labelFloat/><br/>
             <mu-raised-button v-on:click="submit" label="Login" class="demo-raised-button" primary v-bind:disabled="loading" v-if="!loading"/>
             <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
+            <mu-circular-progress :size="60" :strokeWidth="7" v-if="loading"/>
         </form>
-        <mu-circular-progress :size="60" :strokeWidth="7" v-if="loading"/>
     </div>
 </template>
 

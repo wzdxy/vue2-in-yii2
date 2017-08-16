@@ -7,6 +7,7 @@ import store from '@/store/store'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-light.min.css'
+import '../../assets/css/common.css'
 import router from  "@/router/admin"
 import Footer from  "@/components/adminFooter.vue"
 import Nav from  "@/components/adminNav.vue"

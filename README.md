@@ -20,7 +20,7 @@ Vue2 in Yii2
     ```
 
 2. apache config
-    ```ini
+    ```
     <VirtualHost *:80>	#vue2-in-yii2\backend
         ServerAdmin webmaster@example.com
         DocumentRoot "{YOUR PROJECT DIR}\backend\web"
