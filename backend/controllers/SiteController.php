@@ -51,7 +51,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//        echo var_dump(Yii::$app->user->isGuest)+"<br>"+var_dump(Yii::$app->user->identity);
+//        if(!file_exists('../../config/site.php')){
+//            return \Yii::$app->runAction('install/index');
+//        }
         return $this->render('../../web/dist/views/admin.html');
     }
 
