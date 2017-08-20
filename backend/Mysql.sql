@@ -101,4 +101,7 @@ CREATE TABLE `comment` (
   COLLATE = 'utf8_unicode_ci'
   ENGINE = InnoDB
   AUTO_INCREMENT = 17;
+
+-- 用户组
+-- 权限
 -- 插入初始数据

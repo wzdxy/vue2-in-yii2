@@ -1,8 +1,6 @@
 <?php
 namespace backend\controllers;
 use common\models\InstallSite;
-use PDO;
-use PDOException;
 
 Class InstallController extends \yii\web\Controller {
     function beforeAction($action)
@@ -20,8 +18,8 @@ Class InstallController extends \yii\web\Controller {
     function actionInit(){
         $install=new InstallSite();
         $install->setAttributes($_POST);
-        if($install->testDbConnect()){
-            if($install->install()) return 'ok';
+        if($install->testDbConnect()===true){
+            if($install->install()===true) return 'ok';
             else return 'install() failed';
         }else{
             return 'cannot connect db';
