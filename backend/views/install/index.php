@@ -18,6 +18,11 @@
             </div>
 
             <div class="form-group ">
+                <label for="dbPrefix">DB Prefix</label>
+                <input name="dbPrefix" class="form-control" type="text" value="">
+            </div>
+
+            <div class="form-group ">
                 <label for="adminDomain">Admin backend Domain</label>
                 <input name="adminDomain" class="form-control" type="text" value="">
             </div>

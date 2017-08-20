@@ -1,3 +1,4 @@
+-- 创建表
 -- 关系表
 CREATE TABLE `relationship` (
   `cid`  INT(11)      NOT NULL,
@@ -100,4 +101,4 @@ CREATE TABLE `comment` (
   COLLATE = 'utf8_unicode_ci'
   ENGINE = InnoDB
   AUTO_INCREMENT = 17;
-
+-- 插入初始数据

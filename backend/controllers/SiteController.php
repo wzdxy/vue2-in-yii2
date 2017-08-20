@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\InstallSite;
 use common\models\SignupForm;
 use common\models\User;
 use Yii;
@@ -51,7 +52,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//        if(!file_exists('../../config/site.php')){
+//        if((!InstallSite::hasInstalled())){
 //            return \Yii::$app->runAction('install/index');
 //        }
         return $this->render('../../web/dist/views/admin.html');
