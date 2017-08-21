@@ -63,6 +63,7 @@ class m170818_145206_create_RABC_tables extends Migration
         foreach ($permission as $idx=>$item){
             foreach ($item['group'] as $group) {
                 $relationInsert[]=[$item['id'],$group,'group-permission'];
+                echo "(".$item['id'].",".$group.",'group-permission')\n";
             }
         }
         $this->batchInsert('relationship',['cid','pid','type'],$relationInsert);

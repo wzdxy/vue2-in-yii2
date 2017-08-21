@@ -103,5 +103,94 @@ CREATE TABLE `comment` (
   AUTO_INCREMENT = 17;
 
 -- 用户组
+CREATE TABLE `group` (
+  `id`   INT(11)      NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL     DEFAULT NULL COLLATE 'utf8_unicode_ci',
+  PRIMARY KEY (`id`)
+)
+  COLLATE = 'utf8_unicode_ci'
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 5;
+
 -- 权限
+CREATE TABLE `permission` (
+  `id`          INT(11)      NOT NULL AUTO_INCREMENT,
+  `name`        VARCHAR(255) NULL     DEFAULT NULL COLLATE 'utf8_unicode_ci',
+  `description` TEXT         NULL
+  COLLATE 'utf8_unicode_ci',
+  PRIMARY KEY (`id`)
+)
+  COLLATE = 'utf8_unicode_ci'
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 19;
+
 -- 插入初始数据
+INSERT INTO `group` (`id`,`name`) VALUES
+  (1,'master'),
+  (2,'admin'),
+  (3,'editor'),
+  (4,'author');
+
+INSERT INTO `permission` (`id`,`name`,`description`)
+VALUES
+  (1,'article_add',''),
+  (2,'article_delete_self',''),
+  (3,'article_delete_all',''),
+  (4,'article_review',''),
+  (5,'article_edit_self',''),
+  (6,'article_edit_all',''),
+  (7,'comment_delete_self',''),
+  (8,'comment_delete_all',''),
+  (9,'message_delete',''),
+  (10,'system_site_description',''),
+  (11,'system_index_head',''),
+  (12,'system_site_description',''),
+  (13,'system_site_theme',''),
+  (14,'user_add',''),
+  (15,'user_group',''),
+  (16,'user_invite',''),
+  (17,'user_delete',''),
+  (18,'guest_ban_ip','');
+
+INSERT INTO `relationship` (`cid`,`pid`,`type`) VALUES
+  (1,1,'group-permission'),
+  (1,2,'group-permission'),
+  (1,3,'group-permission'),
+  (1,4,'group-permission'),
+  (2,1,'group-permission'),
+  (2,2,'group-permission'),
+  (2,3,'group-permission'),
+  (2,4,'group-permission'),
+  (3,1,'group-permission'),
+  (3,2,'group-permission'),
+  (3,3,'group-permission'),
+  (4,1,'group-permission'),
+  (4,2,'group-permission'),
+  (4,3,'group-permission'),
+  (5,1,'group-permission'),
+  (5,2,'group-permission'),
+  (5,3,'group-permission'),
+  (5,4,'group-permission'),
+  (6,1,'group-permission'),
+  (6,2,'group-permission'),
+  (6,3,'group-permission'),
+  (7,1,'group-permission'),
+  (7,2,'group-permission'),
+  (8,1,'group-permission'),
+  (8,2,'group-permission'),
+  (9,1,'group-permission'),
+  (9,2,'group-permission'),
+  (10,1,'group-permission'),
+  (11,1,'group-permission'),
+  (12,1,'group-permission'),
+  (13,1,'group-permission'),
+  (14,1,'group-permission'),
+  (14,2,'group-permission'),
+  (15,1,'group-permission'),
+  (15,2,'group-permission'),
+  (16,1,'group-permission'),
+  (16,2,'group-permission'),
+  (17,1,'group-permission'),
+  (18,1,'group-permission'),
+  (18,2,'group-permission');
+

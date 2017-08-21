@@ -5,6 +5,7 @@ use PDO;
 use PDOException;
 use Yii;
 use yii\base\Model;
+use yii\db\Migration;
 
 class InstallSite extends Model
 {
@@ -29,7 +30,12 @@ class InstallSite extends Model
     public static function hasInstalled(){
         $configFile=Yii::getAlias('@common').'/config/site.php';
         if(file_exists($configFile)){
-            $x=file_get_contents($configFile);
+            $config=require $configFile;
+            if(isset($config['db'])){
+                return true;
+            }else {
+                return false;
+            }
         }
         return file_exists($configFile);
     }
@@ -64,18 +70,58 @@ class InstallSite extends Model
         };
         $config['db']=$this->generateDbConfig();
         $config['mailer']=$this->generateMailerConfig();
-        $text='<?php '.var_export($config,true).'?>';
+        $text="<?php return\n".var_export($config,true)."?>";
         return file_put_contents($configFile,$text);
     }
 
     public function install(){
         $this->initDatabase();
         $this->writeConfigFile();
-        $this->createInitiallyData();
+//        $this->createInitiallyData();
         return true;
     }
 
     private function createInitiallyData(){
+//        $curPdo=(new Connection)->getMasterPdo();
+        Yii::$app->db->close();
+//        $curPdo=null;
+        $permission=[
+            ['id'=>1,'name'=>'article_add','description'=>'添加文章','group'=>[1,2,3,4]],
+            ['id'=>2,'name'=>'article_delete_self','description'=>'','group'=>[1,2,3,4]],
+            ['id'=>3,'name'=>'article_delete_all','description'=>'','group'=>[1,2,3]],
+            ['id'=>4,'name'=>'article_review','description'=>'','group'=>[1,2,3]],
+            ['id'=>5,'name'=>'article_edit_self','description'=>'','group'=>[1,2,3,4]],
+            ['id'=>6,'name'=>'article_edit_all','description'=>'','group'=>[1,2,3]],
+            ['id'=>7,'name'=>'comment_delete_self','description'=>'','group'=>[1,2]],
+            ['id'=>8,'name'=>'comment_delete_all','description'=>'','group'=>[1,2]],
+            ['id'=>9,'name'=>'message_delete','description'=>'','group'=>[1,2]],
+            ['id'=>10,'name'=>'system_site_description','description'=>'','group'=>[1]],
+            ['id'=>11,'name'=>'system_index_head','description'=>'','group'=>[1]],
+            ['id'=>12,'name'=>'system_site_description','description'=>'','group'=>[1]],
+            ['id'=>13,'name'=>'system_site_theme','description'=>'','group'=>[1]],
+            ['id'=>14,'name'=>'user_add','description'=>'','group'=>[1,2]],
+            ['id'=>15,'name'=>'user_group','description'=>'','group'=>[1,2]],
+            ['id'=>16,'name'=>'user_invite','description'=>'','group'=>[1,2]],
+            ['id'=>17,'name'=>'user_delete','description'=>'','group'=>[1]],
+            ['id'=>18,'name'=>'guest_ban_ip','description'=>'','group'=>[1,2]],
+        ];
+        Yii::$app->db->createCommand()->batchInsert('group',['name'],[
+            ['name'=>'master'],['name'=>'admin'],['name'=>'editor'],['name'=>'author'],
+        ]);
+        $permissionInsert=[];
+        foreach ($permission as $idx=>$item){
+            $permissionInsert[]=[$item['id'],$item['name'],$item['description']];
+        }
+        Yii::$app->db->createCommand()->batchInsert('permission',['id','name','description'],$permissionInsert);
+
+        // INSERT relation
+        $relationInsert=[];
+        foreach ($permission as $idx=>$item){
+            foreach ($item['group'] as $group) {
+                $relationInsert[]=[$item['id'],$group,'group-permission'];
+            }
+        }
+        Yii::$app->db->createCommand()->batchInsert('relationship',['cid','pid','type'],$relationInsert);
         return true;
     }
 
@@ -94,6 +140,22 @@ class InstallSite extends Model
             'charset' => 'utf8',
             'tablePrefix'=>$this->dbPrefix,
         ];
+    }
+
+    public static function uninstall(){
+        (new Migration())->dropTable('relationship');
+        (new Migration())->dropTable('user');
+        (new Migration())->dropTable('group');
+        (new Migration())->dropTable('permission');
+        (new Migration())->dropTable('article');
+        (new Migration())->dropTable('comment');
+        (new Migration())->dropTable('tag');
+        $configFile=Yii::getAlias('@common').'/config/site.php';
+        if(file_exists($configFile)){
+            $text="<?php return\n".var_export([],true)."?>";
+            return file_put_contents($configFile,$text);
+        }else return false;
+
     }
 
 }
