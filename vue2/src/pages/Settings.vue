@@ -22,12 +22,21 @@
             <div class="tab-item" v-show="bottomNav === 'theme'">
                 <h2>Theme</h2>
             </div>
+            <div class="tab-item" v-show="bottomNav === 'backup'">
+                <h2>Backup</h2>
+                <form action="#">
+                    <h3>Import From Ghost</h3>
+                    <mu-text-field  label="ImportFrom Ghost" icon="title" type="file" fullWidth/><br/>
+                    <mu-raised-button label="Import" class="demo-raised-button" primary style="w100px"/>
+                </form>
+            </div>
         </div>
         <mu-paper>
             <mu-bottom-nav :value="bottomNav" @change="handleBtnChange">
                 <mu-bottom-nav-item value="personal" title="Personal" icon="person"/>
                 <mu-bottom-nav-item value="system" title="System" icon="settings"/>
                 <mu-bottom-nav-item value="theme" title="Theme" icon="color_lens"/>
+                <mu-bottom-nav-item value="backup" title="Backup" icon="backup"/>
             </mu-bottom-nav>
         </mu-paper>
     </div>
