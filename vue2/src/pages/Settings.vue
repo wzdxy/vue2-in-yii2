@@ -23,12 +23,16 @@
                 <h2>Theme</h2>
             </div>
             <div class="tab-item" v-show="bottomNav === 'backup'">
-                <h2>Backup</h2>
-                <form action="#">
-                    <h3>Import From Ghost</h3>
-                    <mu-text-field  label="ImportFrom Ghost" icon="title" type="file" fullWidth/><br/>
-                    <mu-raised-button label="Import" class="demo-raised-button" primary style="w100px"/>
-                </form>
+                <h2>Import</h2>
+                <div class="btn-group-column">
+                    <mu-raised-button label="Import From Backup" primary />
+                    <mu-raised-button label="Import From Ghost" primary @click="importModal=true"/>
+                </div>
+                <h2>Back Up</h2>
+                <div class="btn-group-column">
+                    <mu-raised-button label="Backup To File" primary />
+                    <mu-raised-button label="Backup To Email" primary />
+                </div>
             </div>
         </div>
         <mu-paper>
@@ -39,6 +43,10 @@
                 <mu-bottom-nav-item value="backup" title="Backup" icon="backup"/>
             </mu-bottom-nav>
         </mu-paper>
+        <mu-dialog :open="importModal" title="Scrollable Dialog" scrollable>
+            <mu-flat-button slot="actions" primary label="Cancel" @click="importModal=false"/>
+            <mu-raised-button slot="actions" primary label="Import"/>
+        </mu-dialog>
     </div>
 </template>
 
@@ -48,7 +56,12 @@
         data () {
             return {
                 activeTab: 'personal',
-                bottomNav: 'personal'
+                bottomNav: 'personal',
+                importModal:false,
+                importFrom:'self',
+                modals:{
+                    importFromGhost:false
+                }
             }
         },
         methods: {
@@ -57,6 +70,9 @@
             },
             handleBtnChange (val) {
                 this.bottomNav = val
+            },
+            openImportModal (importFrom){
+                this.importFrom=importFrom;
             }
         }
     }
@@ -76,21 +92,24 @@
     .tab-item h2{
         text-align: center;
     }
-    .tab-item form{
+    .tab-item form, .btn-group-column{
         margin: 0 auto;
         display: flex;
         flex-direction: column;
     }
-    .tab-item form .mu-text-field{
+    .tab-item form .mu-text-field, .btn-group-column{
         margin:0 auto;
     }
+    .btn-group-column button{
+        margin-bottom: 10px;
+    }
     @media (min-width: 480px) {
-        .tab-item form{
+        .tab-item form, .btn-group-column{
             max-width:30%;
         }
     }
     @media (max-width: 480px) {
-        .tab-item form{
+        .tab-item form, .btn-group-column{
             max-width:90%;
         }
     }

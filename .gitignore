@@ -36,4 +36,4 @@ phpunit.phar
 
 # vue dist files
 frontend/web/dist/
-backend/web/dist/
+#backend/web/dist/
