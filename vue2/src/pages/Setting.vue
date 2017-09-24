@@ -26,7 +26,7 @@
                 <h2>Import</h2>
                 <div class="btn-group-column">
                     <mu-raised-button label="Import From Backup" primary />
-                    <mu-raised-button label="Import From Ghost" primary @click="importModal=true"/>
+                    <mu-raised-button label="Import From Ghost" primary @click="openImportModal('ghost')"/>
                 </div>
                 <h2>Back Up</h2>
                 <div class="btn-group-column">
@@ -43,7 +43,10 @@
                 <mu-bottom-nav-item value="backup" title="Backup" icon="backup"/>
             </mu-bottom-nav>
         </mu-paper>
-        <mu-dialog :open="importModal" title="Scrollable Dialog" scrollable>
+        <mu-dialog :open="importModal" title="Import From File" scrollable>
+            <upload-file url="/setting/import" :additionalFormData="{type:'import',src:importFrom}" selectLabel="Select File" uploadLabel="Import">
+
+            </upload-file>
             <mu-flat-button slot="actions" primary label="Cancel" @click="importModal=false"/>
             <mu-raised-button slot="actions" primary label="Import"/>
         </mu-dialog>
@@ -51,6 +54,7 @@
 </template>
 
 <script>
+    import uploadFile from '../components/uploadFile'
     export default {
         name: 'SystemSetting',
         data () {
@@ -59,9 +63,6 @@
                 bottomNav: 'personal',
                 importModal:false,
                 importFrom:'self',
-                modals:{
-                    importFromGhost:false
-                }
             }
         },
         methods: {
@@ -72,9 +73,11 @@
                 this.bottomNav = val
             },
             openImportModal (importFrom){
+                this.importModal=true;
                 this.importFrom=importFrom;
             }
-        }
+        },
+        components:{'upload-file':uploadFile}
     }
 </script>
 

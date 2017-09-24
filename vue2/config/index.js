@@ -60,6 +60,13 @@ module.exports = {
             pathRewrite: {
                 '^/tag': '/tag',
             }
+        },
+        '/setting':{
+            target: 'http://localhost:82',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/setting': '/setting',
+            }
         }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

@@ -17,7 +17,7 @@
                     {href:'#/post',title:'Post',icon:'add_circle_outline'},
                     {href:'#/article',title:'Article',icon:'playlist_add_check'},
                     {href:'#/user',title:'User',icon:'group'},
-                    {href:'#/settings',title:'Settings',icon:'settings'},
+                    {href:'#/setting',title:'Settings',icon:'settings'},
                 ]
             }
         },
