@@ -40,7 +40,13 @@ class Setting extends ActiveRecord
         if(isset($fileData->db) && isset($fileData->db[0]->data)){
             $data=$fileData->db[0]->data;
             if(isset($data->tags)){
-
+                $tagsArray=[];
+                foreach ($data->tags as $tag){
+                    $tagsArray[]=[
+                        'name'=>$tag->name,'url'=>$tag->slug,'description'=>$tag->description
+                    ];
+                }
+                Tag::batchAdd($tagsArray);//TODO 数组去重
             }
             if(isset($data->posts)){
 

@@ -60,6 +60,10 @@ class Tag extends \yii\db\ActiveRecord
         return $this->id;
     }
 
+    public static function batchAdd($tags){
+        $result=Yii::$app->db->createCommand()->batchInsert(static::tableName(), ['name','url','description'], $tags)->execute();
+    }
+
     public static function getAllList(){
         return static::find()->select(['id','name','description','url','count'])->where(['status'=>0])->all();
     }
