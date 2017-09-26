@@ -73,6 +73,10 @@ class Tag extends \yii\db\ActiveRecord
         return Tag::find()->where(['id'=>$relationshipQuery])->all();
     }
 
+    public static function getByName($name){
+        return static::findOne(['name'=>$name]);
+    }
+
     public function refreshCount(){
         $relationshipCount=Relationship::find()->where(['cid'=>$this->id,'type'=>'tag-article'])->count();
         $this->count=$relationshipCount;

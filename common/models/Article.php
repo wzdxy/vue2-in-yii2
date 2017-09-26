@@ -136,8 +136,14 @@ class Article extends ActiveRecord
         return $count;
     }
 
-
-
+    public static function batchAdd($articles){
+        $result=Yii::$app->db->createCommand()->batchInsert(
+            static::tableName(),
+            ['title','text','html','author_id','author_name','type','tag','status','created_at','updated_at','url','comment_count'],
+            $articles
+        )->execute();
+        return $result;
+    }
 
     public static function getByTagUrl($url){
         $tag=Tag::findOne(['url'=>$url]);
@@ -148,6 +154,10 @@ class Article extends ActiveRecord
         }
         $relationshipQuery=(new Query())->select('pid')->from('relationship')->where(['cid'=>$tagId,'type'=>'tag-article']);
         return static::find()->where(['id'=>$relationshipQuery])->all();
+    }
+
+    public static function getByUrl($url){
+        return static::findOne(['url'=>$url]);
     }
 
     public function getAllList(){
