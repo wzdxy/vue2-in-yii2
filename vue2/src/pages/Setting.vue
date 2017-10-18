@@ -30,7 +30,7 @@
                 </div>
                 <h2>Back Up</h2>
                 <div class="btn-group-column">
-                    <mu-raised-button label="Backup To File" primary />
+                    <mu-raised-button label="Backup To File" primary @click="backupToFile"/>
                     <mu-raised-button label="Backup To Email" primary />
                 </div>
             </div>
@@ -75,6 +75,11 @@
             openImportModal (importFrom){
                 this.importModal=true;
                 this.importFrom=importFrom;
+            },
+            backupToFile (){
+                this.$http.get('/setting/backup?target=file').then(function (res) {
+                    console.log(res)
+                }.bind(this))
             }
         },
         components:{'upload-file':uploadFile}

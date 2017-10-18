@@ -164,6 +164,10 @@ class Article extends ActiveRecord
         return self::find()->select(['id','title','author_name','created_at'])->orderBy('created_at DESC')->asArray()->all();
     }
 
+    public static function exportAllData(){
+        return self::find()->asArray()->all();
+    }
+
     public static function getAllHead(){
         return self::find()->select(['id','title','text','author_name','created_at'])->orderBy('created_at DESC')->asArray()->all();
     }

@@ -41,4 +41,8 @@ class Relationship extends \yii\db\ActiveRecord
             'pid' => 'Pid',
         ];
     }
+
+    public static function exportAllData(){
+        return self::find()->asArray()->all();
+    }
 }

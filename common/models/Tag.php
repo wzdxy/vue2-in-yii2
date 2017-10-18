@@ -84,6 +84,10 @@ class Tag extends \yii\db\ActiveRecord
         return $relationshipCount;
     }
 
+    public static function exportAllData(){
+        return self::find()->asArray()->all();
+    }
+
     /**
      * 验证唯一性 ( $name 和 $url 不能重复 )
      * @return array|bool

@@ -65,6 +65,10 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function exportAllData(){
+        return self::find()->asArray()->all();
+    }
+
     public function xssHandle(){
         $this->text=htmlspecialchars($this->text);
     }

@@ -93,4 +93,14 @@ class Setting extends ActiveRecord
         }
         return ['code'=>0];
     }
+
+    public static function exportAllData(){
+        $data = [
+            'article'=>Article::exportAllData(),
+            'tag'=>Tag::exportAllData(),
+            'comment'=>Comment::exportAllData(),
+            'relation'=>Relationship::exportAllData()
+        ];
+        return $data;
+    }
 }
