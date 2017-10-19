@@ -136,12 +136,10 @@ class Article extends ActiveRecord
         return $count;
     }
 
-    public static function batchAdd($articles){
-        $result=Yii::$app->db->createCommand()->batchInsert(
-            static::tableName(),
-            ['title','text','html','author_id','author_name','type','tag','status','created_at','updated_at','url','comment_count'],
-            $articles
-        )->execute();
+    public static function batchAdd($articles,$autoId){
+        if($autoId)$cols=['title','text','html','author_id','author_name','type','tag','status','created_at','updated_at','url','comment_count'];
+        else $cols=['id','title','text','html','author_id','author_name','type','tag','status','created_at','updated_at','url','comment_count'];
+        $result=Yii::$app->db->createCommand()->batchInsert(static::tableName(),$cols,$articles)->execute();
         return $result;
     }
 

@@ -60,8 +60,10 @@ class Tag extends \yii\db\ActiveRecord
         return $this->id;
     }
 
-    public static function batchAdd($tags){
-        $result=Yii::$app->db->createCommand()->batchInsert(static::tableName(), ['name','url','description'], $tags)->execute();
+    public static function batchAdd($tags,$autoId){
+        if($autoId)$cols=['name','url','description'];
+        else $cols=['id','name','url','description'];
+        $result=Yii::$app->db->createCommand()->batchInsert(static::tableName(), $cols, $tags)->execute();
     }
 
     public static function getAllList(){

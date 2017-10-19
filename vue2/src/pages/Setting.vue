@@ -25,12 +25,12 @@
             <div class="tab-item" v-show="bottomNav === 'backup'">
                 <h2>Import</h2>
                 <div class="btn-group-column">
-                    <mu-raised-button label="Import From Backup" primary />
+                    <mu-raised-button label="Import From Backup" primary @click="openImportModal('backup')"/>
                     <mu-raised-button label="Import From Ghost" primary @click="openImportModal('ghost')"/>
                 </div>
                 <h2>Back Up</h2>
                 <div class="btn-group-column">
-                    <mu-raised-button label="Backup To File" primary @click="backupToFile"/>
+                    <mu-raised-button label="Backup To File" primary href="/setting/backup?target=file"/>
                     <mu-raised-button label="Backup To Email" primary />
                 </div>
             </div>
@@ -108,7 +108,7 @@
     .tab-item form .mu-text-field, .btn-group-column{
         margin:0 auto;
     }
-    .btn-group-column button{
+    .btn-group-column .mu-raised-button{
         margin-bottom: 10px;
     }
     @media (min-width: 480px) {

@@ -45,4 +45,9 @@ class Relationship extends \yii\db\ActiveRecord
     public static function exportAllData(){
         return self::find()->asArray()->all();
     }
+
+    public static function batchAdd($relation){
+        $cols=['cid','pid','type'];
+        return $result=Yii::$app->db->createCommand()->batchInsert(static::tableName(), $cols, $relation)->execute();
+    }
 }

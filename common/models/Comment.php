@@ -69,6 +69,13 @@ class Comment extends \yii\db\ActiveRecord
         return self::find()->asArray()->all();
     }
 
+    public static function batchAdd($comment,$autoId){
+        if($autoId)$cols=['text','author_id','author_name','author_email','author_blog','author_ip','parent','status','created_at','updated_at'];
+        else $cols=['id','text','author_id','author_name','author_email','author_blog','author_ip','parent','status','created_at','updated_at'];
+        $result=Yii::$app->db->createCommand()->batchInsert(static::tableName(),$cols,$comment)->execute();
+        return $result;
+    }
+
     public function xssHandle(){
         $this->text=htmlspecialchars($this->text);
     }
