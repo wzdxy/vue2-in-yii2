@@ -27,7 +27,7 @@ class SettingController extends BackendController
         $get = yii::$app->request->get();
         $data = Setting::exportAllData();
         if ($get['target'] === 'file') {
-            $path = Yii::getAlias('@web/backup');
+            $path = Yii::getAlias('@runtime/backup');
             if (!is_dir($path)) mkdir($path);
             $filename = $path . date("Ymd-hms") . '.json';
             file_put_contents($filename, json_encode($data));
