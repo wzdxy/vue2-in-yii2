@@ -3,6 +3,9 @@
  */
 $(function () {
     // commentValidateInit();
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
 });
 
 function commentSubmit(btn) {
