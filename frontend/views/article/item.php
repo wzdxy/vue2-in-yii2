@@ -12,7 +12,7 @@ $this->title = $article->title;
             <div class="card-image waves-effect waves-block waves-light" style="max-height: 30vh;">
                 <img class="activator" src="/images/1.jpg">
             </div>
-            <div class="card-content">
+            <div class="card-content article-title">
                 <header class="card-title">
                     <h3 style="margin-top: 0;"><?=$article->title?></h3>
                     <span class="article-info col m3 s12" style="text-align: right;">
@@ -29,7 +29,7 @@ $this->title = $article->title;
                 </span>
                 </header>
             </div>
-            <div class="card-content">
+            <div class="card-content article-content">
                 <?=$article->html?>
             </div>
             <div class="card-reveal" style="display: none; transform: translateY(0px);">

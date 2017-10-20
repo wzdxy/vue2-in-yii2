@@ -18,3 +18,84 @@
 .card-title>h3{
     margin: 0;
 }
+
+.article-content h1 {
+    font-size:2.4rem;
+    font-weight: bold;
+    border-bottom:1px solid #ddd;
+    padding-bottom:6px;
+}
+
+.article-content h2 {
+    font-size:2.0rem;
+    border-bottom:1px solid #ddd;
+    padding-bottom:6px;
+    font-weight: bold;
+}
+.article-content h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.article-content h4 {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.article-content h5 {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.article-content h6 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.article-content pre {
+    background-color: #ccc;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.article-content code {
+    background-color: #ccc;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+.article-content strong{
+    font-weight: bold;
+}
+.article-content sub,.article-content sup{
+    color: #000089;
+}
+.article-content em{
+    margin-right: 3px;
+}
+.article-content blockquote{
+    border-color: #0091EA;
+    margin-left:10px;
+    color: #999999;
+}
+
+.article-content ul,.article-content ol{
+    padding-left: 1rem;
+}
+.article-content ul>li{
+    list-style-type:circle;
+}
+.article-content>ul>li{
+    list-style-type: disc;
+}
+
+.article-content td, .article-content th{
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.article-content p {
+    margin: 4px;
+    line-height: 1.8;
+}
