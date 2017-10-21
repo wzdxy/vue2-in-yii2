@@ -45,7 +45,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/index',
-                '<controller:tag>/<url:\w+>' => '<controller>/index',
+                '<controller:tag>/<url:\S+>' => '<controller>/index',
             ],
         ],
 
