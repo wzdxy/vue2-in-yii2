@@ -53,16 +53,20 @@
 }
 
 .article-content pre {
-    background-color: #ccc;
+    background-color: #f3f3f3;
     padding: 8px;
     border-radius: 4px;
 }
 
-.article-content code {
-    background-color: #ccc;
-    padding: 2px;
+.article-content pre>code {
+    background-color: #f3f3f3;
+}
+.article-content p>code {
+    background-color: #f3f3f3;
+    padding: 2px 3px;
     margin: 2px;
-    border-radius: 2px;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
 }
 
 .article-content strong{
