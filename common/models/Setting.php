@@ -153,7 +153,7 @@ class Setting extends ActiveRecord
             },$fileData->relation));
         }
 
-
+        Tag::refreshAllCount();
 
         return ['code'=>0];
     }

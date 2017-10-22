@@ -23,15 +23,15 @@
                 <h2>Theme</h2>
             </div>
             <div class="tab-item" v-show="bottomNav === 'backup'">
-                <h2>Import</h2>
+                <h2>Import Articles</h2>
                 <div class="btn-group-column">
-                    <mu-raised-button label="Import From Backup" primary @click="openImportModal('backup')"/>
-                    <mu-raised-button label="Import From Ghost" primary @click="openImportModal('ghost')"/>
+                    <mu-raised-button label="Import Articles From Backup" primary @click="openImportModal('backup')"/>
+                    <mu-raised-button label="Import Articles From Ghost" primary @click="openImportModal('ghost')"/>
                 </div>
-                <h2>Back Up</h2>
+                <h2>Back Up Articles</h2>
                 <div class="btn-group-column">
-                    <mu-raised-button label="Backup To File" primary href="/setting/backup?target=file"/>
-                    <mu-raised-button label="Backup To Email" primary />
+                    <mu-raised-button label="Backup Articles To File" primary href="/setting/backup?target=file"/>
+                    <mu-raised-button label="Backup Articles To Email" primary />
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <mu-bottom-nav-item value="backup" title="Backup" icon="backup"/>
             </mu-bottom-nav>
         </mu-paper>
-        <mu-dialog :open="importModal" title="Import From File" scrollable>
+        <mu-dialog :open="importModal" title="Import Articles From File" scrollable>
             <upload-file url="/setting/import" :additionalFormData="{type:'import',src:importFrom}" selectLabel="Select File" uploadLabel="Import">
 
             </upload-file>

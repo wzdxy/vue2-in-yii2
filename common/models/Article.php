@@ -119,7 +119,7 @@ class Article extends ActiveRecord
                 }
                 $rs=new Relationship(['cid'=>$tagId,'pid'=>$this->id,'type'=>'tag-article']);
                 $rs->save();
-                $tagArticleCount=Tag::findOne(['id'=>$tagId])->refreshCount();
+                $tagArticleCount=Tag::refreshAllCount();
             }
             return 0;
         }
