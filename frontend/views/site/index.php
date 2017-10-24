@@ -10,6 +10,7 @@ $this->title = 'My Yii Application';
 <div class="section white">
     <div class="row container">
         <h1>Welcome To ZCHI 's Blog</h1>
+        <?php if(false){ ?>
         <p class="lead">You have successfully created your vue2 in yii2 application.</p>
         <p><a class="btn btn-lg btn-success" href="http://b.localhost:82/#/signup">Sign up as admin </a></p>
         <div class="card blue-grey darken-1 col s12 m6">
@@ -18,10 +19,15 @@ $this->title = 'My Yii Application';
                 <p>Before you publish a article you can not see anything</p>
             </div>
             <div class="card-action">
-                <a href="/catalog">All article</a>
+                <a href="/article">All article</a>
                 <a href="/personalcenter">Go to publish</a>
             </div>
         </div>
+        <?php }else{ ?>
+            <a class="btn btn-lg btn-success" href="/article">All Article</a>
+            <br><br>
+            <a class="btn btn-lg btn-success" href="/tag">All Tag</a>
+        <?php }?>
     </div>
 </div>
 <script>
