@@ -24,6 +24,7 @@ class InstallSite extends Model
     {
         return [
             [['dbName', 'dbUser'], 'required'],
+            [['adminDomain','frontDomain'],'string']
         ];
     }
 
@@ -42,9 +43,9 @@ class InstallSite extends Model
 
     public function initDatabase(){
         try{
-            $sql=file_get_contents('../Mysql.sql');
+            $siteInitSql=file_get_contents('../Mysql.sql');
             $dbh = new PDO('mysql:dbname='.$this->dbName.';host=127.0.0.1', $this->dbUser, $this->dbPassword);
-            $dbh->exec($sql);
+            $dbh->exec($siteInitSql);
             $dbh=null;
             return true;
         } catch (PDOException $e){

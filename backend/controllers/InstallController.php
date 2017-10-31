@@ -26,7 +26,7 @@ Class InstallController extends \yii\web\Controller {
         $install=new InstallSite();
         $install->setAttributes($_POST);
         if($install->testDbConnect()===true){
-            if($install->install()===true) return 'ok';
+            if($install->install()===true) return $this->redirect('/#/signup');
             else return 'install() failed';
         }else{
             return 'cannot connect db';

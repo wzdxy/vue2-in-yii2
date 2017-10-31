@@ -124,6 +124,16 @@ CREATE TABLE `permission` (
   ENGINE = InnoDB
   AUTO_INCREMENT = 19;
 
+-- 配置
+CREATE TABLE `setting` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user` INT(11) NULL DEFAULT NULL,
+  `name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+  `value` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+  PRIMARY KEY (`id`)
+)
+  COLLATE 'utf8_unicode_ci';
+
 -- 插入初始数据
 INSERT INTO `group` (`id`,`name`) VALUES
   (1,'master'),
@@ -194,3 +204,8 @@ INSERT INTO `relationship` (`cid`,`pid`,`type`) VALUES
   (18,1,'group-permission'),
   (18,2,'group-permission');
 
+INSERT INTO `setting` (`user`, `name`, `value`) VALUES
+  (0,'admin-domain','admin.zchi.me'),
+  (0,'front-domain','front.zchi.me'),
+  (0,'index-head','Welcome To ZCHI ''s Blog'),
+  (0,'index-title','ZCHI ''s Blog')
