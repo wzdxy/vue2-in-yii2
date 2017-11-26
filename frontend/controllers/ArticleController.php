@@ -3,6 +3,7 @@ namespace frontend\controllers;
 use common\models\Comment;
 use common\models\Tag;
 use Yii;
+use yii\web;
 use common\models\Article;
 use yii\db\Query;
 
@@ -19,7 +20,10 @@ class ArticleController extends FrontController
                 'list'=>Article::getAllHead()
             ]);
         }
-        $articleQuery=Article::findOne($id);
+        $articleQuery=Article::findOne(['id'=>$id,'status'=>0]);
+        if($articleQuery===null){
+            return '404';
+        }
         $tagQuery=Tag::getTagsByArticleId($id);
         $commentQuery=Comment::getByArticleId($id);
         return $this->render('item',[

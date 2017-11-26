@@ -17,7 +17,7 @@ use yii\db\Query;
  * @property string $author_name
  * @property string $type
  * @property string $tag
- * @property integer $status
+ * @property integer $status            // 0 正常 -1 回收站
  * @property string $created_at
  * @property string $updated_at
  * @property string $url
@@ -108,6 +108,18 @@ class Article extends ActiveRecord
         }
     }
 
+    public static function moveRecycle($list){
+        $articles=self::find()->where(['id'=>$list])->all();
+        $count=0;
+        foreach ($articles as $article){
+            $article->status=-1;
+            if($article->save()){
+                $count++;
+            };
+        }
+        return $count;
+    }
+
     public function addTags($tags){
         if(is_array($tags)){
             foreach ($tags as $tag){
@@ -159,7 +171,7 @@ class Article extends ActiveRecord
     }
 
     public function getAllList(){
-        return self::find()->select(['id','title','author_name','created_at'])->orderBy('created_at DESC')->asArray()->all();
+        return self::find()->select(['id','title','author_name','created_at','status'])->orderBy('created_at DESC')->asArray()->all();
     }
 
     public static function exportAllData(){
@@ -167,7 +179,7 @@ class Article extends ActiveRecord
     }
 
     public static function getAllHead(){
-        return self::find()->select(['id','title','text','author_name','created_at'])->orderBy('created_at DESC')->asArray()->all();
+        return self::find()->select(['id','title','text','author_name','created_at'])->where(['status'=>0])->orderBy('created_at DESC')->asArray()->all();
     }
 
     public static function getText($id){

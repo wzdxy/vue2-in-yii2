@@ -1,6 +1,8 @@
 <template>
     <div id="AdminArticle">
-        <h2 v-show="!isEditing" style="padding-left: 30px;">Article</h2>
+        <h2 v-show="!isEditing" style="padding-left: 30px;position: relative;">
+            Article
+        </h2>
         <mu-table v-show="!isEditing" :enableSelectAll="true" :multiSelectable="true" :selectable="true" :showCheckbox="true">
             <mu-thead slot="header">
                 <mu-tr>
@@ -18,7 +20,7 @@
                     <mu-td>{{item.author_name}}</mu-td>
                     <mu-td>{{item.created_at }}</mu-td>
                     <mu-td>
-                        <mu-icon-button touch icon="delete" @click="deleteArticle(item.id)"/>
+                        <mu-icon-button touch icon="delete" @click="deleteArticle(item)"/>
                         <mu-icon-button touch icon="edit" @click="editArticle(item.id,item.title)"/>
                     </mu-td>
                 </mu-tr>
@@ -49,9 +51,17 @@
             }
         },
         methods:{
-            deleteArticle:function(id){
+            deleteArticle:function(item){
                 event.stopPropagation();
-                alert('delete '+id);
+//                alert('delete '+item.title+'?');
+                if(confirm('delete '+item.title+'?')){
+                    vm.$http.post('/article/delete', this.$qs.stringify({
+                        articles: [item.id]
+                    })).then(function (res) {
+                        this.getArticleList();
+                        if(res.data.result!==0)alert(res.message);
+                    }.bind(this))
+                }
             },
             editArticle:function(id,title){
                 event.stopPropagation();
@@ -71,6 +81,7 @@
                 }.bind(this));
 
             },
+
             exitEditing(){
                 this.isEditing=false;
             },
@@ -79,7 +90,10 @@
                 this.$http.get('/article/list').then(function (res) {
                     this.isLoading=false;
                     if(res.data.result===0){
-                        this.articleList=res.data.list;
+                        this.articleList = res.data.list.map(item => {
+                            item.selected = false;
+                            return item
+                        }).filter(item=>item.status==0);
                     }
                 }.bind(this));
             }
@@ -101,5 +115,10 @@
         left: 0;
         right: 0;
         z-index: 2001;
+    }
+    .btn-group-right{
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 </style>

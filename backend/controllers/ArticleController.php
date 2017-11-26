@@ -40,6 +40,16 @@ class ArticleController extends BackendController
         }
     }
 
+    public function actionDelete(){
+        $post=Yii::$app->request->post();
+        $articles=$post['articles'];
+        $result=Article::moveRecycle($articles);
+        if($result===count($articles))
+            return json_encode(['result'=>0,'message'=>'Delete Success']);
+        else
+            return json_encode(['result'=>-1,'message'=>$result]);
+    }
+
     public function actionList(){
         $modal=new Article();
         $List=$modal->getAllList();
