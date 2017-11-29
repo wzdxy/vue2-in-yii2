@@ -75,17 +75,19 @@ class Article extends ActiveRecord
      * @param $tags
      * @return bool
      */
-    public function publish($title,$text,$html,$tags){
+    public function publish($title,$text,$html,$tags,$url,$post_time){
         $User=Yii::$app->user->getIdentity();
 
         $this->title=$title;
         $this->text=$text;
         $this->html=$html;
         $this->tag='';
-        $this->url='';
+        $this->url=$url;
         $this->type='';
         $this->author_id=$User->id;
         $this->author_name=$User->username;
+//        $this->created_at=$post_time;
+        $this->created_at=$post_time;
         $this->status=0;
         if($this->save()){
             $this->addTags($tags);

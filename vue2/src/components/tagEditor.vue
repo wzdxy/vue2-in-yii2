@@ -66,7 +66,7 @@
          */
         mounted:function(){
             let This=this;
-            vm.$http.get('/tag/list').then(function (res) {
+            this.$http.get('/tag/list').then(function (res) {
                 if(res.data.result===0){
                     This.existTags=[];
                     for(let i=0,m=res.data.list.length;i<m;i++){

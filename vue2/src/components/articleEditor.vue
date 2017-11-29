@@ -9,8 +9,12 @@
             <mu-raised-button  v-on:click="exitEditor" label="Cancel" class="demo-raised-button"  v-if="!loading && action=='edit'"/>
             <mu-circular-progress :size="60" :strokeWidth="6" v-if="loading" slot="right" class="loading-circular"/>
         </div>
-        <tag-editor  :selectedTags.sync="prop_tag" style="float: right;"></tag-editor>
-
+        <tag-editor  :selectedTags.sync="prop_tag" style="float: right;width: 65%;"></tag-editor>
+        <div style="float: left;width: 130px;overflow: hidden;">
+            <mu-date-picker v-model="post_date" hintText="Current Date" style="width: 200px;"/><br/>
+            <mu-time-picker v-model="post_time" hintText="Current Time" format="24hr"/><br/>
+            <mu-text-field hintText="Custom Url" v-model="custom_url"/><br/>
+        </div>
 
         <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">{{msg}}</mu-popup>
     </div>
@@ -29,6 +33,9 @@
                 prop_md:this.md||'',
                 prop_tag:this.tag||[],
                 html:'',
+                post_time:'',
+                post_date:'',
+                custom_url:'',
                 topPopup: false,
                 msg:'',
                 loading:false,
@@ -85,7 +92,9 @@
                         title:this.prop_title,
                         md:this.prop_md,
                         html:this.html,
-                        tag:JSON.stringify(this.prop_tag)||''
+                        tag:JSON.stringify(this.prop_tag)||'',
+                        time:this.getPostTime(),
+                        url:this.custom_url,
                     })
                 ).then(function (res) {
                     this.loading=false;
@@ -109,7 +118,9 @@
                         title:this.prop_title,
                         md:this.prop_md,
                         html:this.html,
-                        tag:JSON.stringify(this.prop_tag)||''
+                        tag:JSON.stringify(this.prop_tag)||'',
+                        time:this.getPostTime(),
+                        url:this.custom_url,
                     })
                 ).then(function (res) {
                     this.loading=false;
@@ -126,6 +137,22 @@
                     this.msg='Update Failed';
                     this.open('top');
                 }.bind(this));
+            },
+            getPostTime(){
+                let c=new Date();
+                if(this.post_date){
+                    let dateArray=this.post_date.split('-');
+                    c.setYear(dateArray[0]);
+                    c.setMonth(dateArray[1]);
+                    c.setDate(dateArray[2]);
+                }
+                if(this.post_time){
+                    let timeArray=this.post_time.split(':');
+                    c.setHours(timeArray[0]);
+                    c.setMinutes(timeArray[1]);
+                }
+                return `${c.getFullYear()}-${c.getMonth()}-${c.getDate()} ${c.getHours()}:${c.getMinutes()}:${c.getSeconds()}`;
+//                return `${c.getFullYear()}-${String(c.getMonth()).padStart(2,'0')}-${String(c.getDate()).padStart(2,'0')} ${String(c.getHours()).padStart(2,'0')}:${String(c.getMinutes()).padStart(2,'0')}:${String(c.getSeconds()).padStart(2,'0')}`;
             },
             /**
              * 清空编辑器
