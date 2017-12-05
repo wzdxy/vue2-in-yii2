@@ -4,3 +4,22 @@
 .article-content>a:hover{
     color:#8df;
 }
+
+.article-archive .article-count{
+    color: #929292;
+}
+
+.article-archive{
+    width: 96%;
+    margin: 0 2%;
+}
+@media screen and (min-device-width: 992px) {
+    .article-archive{
+        margin: 0;
+        position: absolute;
+        top:100px;
+        right:20px;
+        width:20%;
+        min-width: 220px;
+    }
+}

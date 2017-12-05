@@ -17,6 +17,9 @@ code{
     font-family:Consolas, sans-serif;
 }
 
+.wrap{
+    position: relative;
+}
 
 /* PC 横屏 */
 @media screen and (min-device-width: 992px) {

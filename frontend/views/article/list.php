@@ -30,6 +30,14 @@ $this->title = 'Articles';
     </div>
 </div>
 
+<div class="article-archive">
+    <ul class="collection with-header">
+        <li class="collection-header"><h6>Archive</h6></li>
+        <a href="#!" class="collection-item">2017-12<span class="secondary-content article-count">22</span></a>
+        <a href="#!" class="collection-item ">2017-12<span class="secondary-content article-count">22</span></a>
+    </ul>
+</div>
+
 <?php
 $this->registerCssFile('@web/css/catalog.css');
 ?>
