@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use function foo\func;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Query;
@@ -186,5 +187,22 @@ class Article extends ActiveRecord
 
     public static function getText($id){
         return static::findOne($id)->text;
+    }
+
+    public static function getArchive(){
+        $group=self::find()->where(['status'=>0])->asArray()->all();
+        $articleQuery=array_map(function ($article){
+            $data=getdate(strtotime($article['created_at']));
+            $article['mon']= $data['mon'];
+            $article['year']= $data['year'];
+            return $article;
+        },$group);
+        $archive=[];
+        foreach ($articleQuery as $article){
+            $key=$article['year'].'-'.$article['mon'];
+            if(isset($archive[$key]))$archive[$key]++;
+            else $archive[$key]=1;
+        }
+        return $archive;
     }
 }

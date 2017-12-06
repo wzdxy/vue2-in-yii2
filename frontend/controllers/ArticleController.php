@@ -17,7 +17,8 @@ class ArticleController extends FrontController
         $id=Yii::$app->request->get('id');
         if(!isset($id)){
             return $this->render('list',[
-                'list'=>Article::getAllHead()
+                'list'=>Article::getAllHead(),
+                'archive'=>Article::getArchive()
             ]);
         }
         $articleQuery=Article::findOne(['id'=>$id,'status'=>0]);
