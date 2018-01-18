@@ -181,8 +181,10 @@ class Article extends ActiveRecord
         return self::find()->asArray()->all();
     }
 
-    public static function getAllHead(){
-        return self::find()->select(['id','title','text','author_name','created_at'])->where(['status'=>0])->orderBy('created_at DESC')->asArray()->all();
+    public static function getHead($params){
+        if(!isset($params))
+            $params=[];
+        return self::find()->select(['id','title','text','author_name','created_at'])->where($params)->orderBy('created_at DESC')->asArray()->all();
     }
 
     public static function getText($id){
@@ -190,10 +192,10 @@ class Article extends ActiveRecord
     }
 
     public static function getArchive(){
-        $group=self::find()->where(['status'=>0])->asArray()->all();
+        $group=self::find()->where(['status'=>0])->orderBy(['created_at'=>SORT_DESC])->asArray()->all();
         $articleQuery=array_map(function ($article){
             $data=getdate(strtotime($article['created_at']));
-            $article['mon']= $data['mon'];
+            $article['mon']= str_pad($data['mon'],2,'0',STR_PAD_LEFT );
             $article['year']= $data['year'];
             return $article;
         },$group);

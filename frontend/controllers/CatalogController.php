@@ -11,7 +11,7 @@ class CatalogController extends FrontController
     public function actionIndex()
     {
         return $this->render('index',[
-            'list'=>Article::getAllHead()
+            'list'=>Article::getHead(null)
         ]);
     }
 

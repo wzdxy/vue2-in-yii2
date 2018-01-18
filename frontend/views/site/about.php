@@ -7,10 +7,15 @@ use yii\helpers\Html;
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>This is the About page. You may modify the following file to customize its content:</p>
-
-    <code><?= __FILE__ ?></code>
+    <p>source code <a href="https://github.com/wzdxy/vue2-in-yii2">wzdxy/vue2-in-yii2</a> </p>
+    <p>e-mail <a href="mailto:zh.ch.0915@gmail.com">zh.ch.0915@gmail.com</a> </p>
 </div>
+<style>
+    .site-about{
+        width: 100%;
+        text-align: center;
+    }
+</style>

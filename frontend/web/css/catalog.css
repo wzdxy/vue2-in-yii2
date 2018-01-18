@@ -1,3 +1,6 @@
+h1.page-title{
+    text-indent: 1rem;
+}
 .article-content>a{
     color:#7ce;
 }
@@ -12,6 +15,10 @@
 .article-archive{
     width: 96%;
     margin: 0 2%;
+}
+
+.article-time{
+    color: #999;
 }
 @media screen and (min-device-width: 992px) {
     .article-archive{

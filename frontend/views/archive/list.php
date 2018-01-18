@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Articles';
+$this->title = 'Archive';
 ?>
 <div class="content-center" style="padding-top: 5px">
     <div class="">
-        <h1 class="page-title">All Articles</h1>
+        <h1 class="page-title"><?=$month?></h1>
         <?php foreach ($list as $article){?>
             <div class="row">
                 <div class="col s12 m8">
@@ -25,7 +25,7 @@ $this->title = 'Articles';
             </div>
         <?php } ?>
         <?php if(count($list)==0) {?>
-            <p>Before you publish a article you can not see anything</p>
+            <p>Nothing</p>
         <?php }?>
     </div>
 </div>

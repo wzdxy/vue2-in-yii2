@@ -28,16 +28,15 @@ code{
         overflow: hidden;
     }
     .wrap{
-        max-height: calc(100vh - 65px);
+        height: calc(100vh - 65px);
         overflow-y: auto;
     }
     .wrap>.content-center{
         width: 70%;
         margin: 0 auto;
     }
-    article{
-        /*width: 70%;*/
-        /*margin: 0 auto;*/
+    nav .brand-logo{
+        padding:0 1rem;
     }
 }
 

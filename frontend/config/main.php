@@ -46,6 +46,7 @@ return [
             'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/index',
                 '<controller:tag>/<url:\S+>' => '<controller>/index',
+                '<controller:archive>/<month:\S+>' => '<controller>/index',
             ],
         ],
 

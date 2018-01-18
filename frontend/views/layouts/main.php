@@ -28,15 +28,15 @@ AppAsset::register($this);
             <li><a href="/">Home</a></li>
             <li><a href="/article">Article</a></li>
             <li><a href="/tag">Tag</a></li>
+            <li><a href="/archive">Archive</a></li>
             <li><a href="/site/about">About</a></li>
-            <li><a href="/site/contact">Contact</a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
             <li><a href="/">Home</a></li>
-            <li><a href="/catalog">Catalog</a></li>
+            <li><a href="/article">Article</a></li>
             <li><a href="/tag">Tag</a></li>
+            <li><a href="/archive">Archive</a></li>
             <li><a href="/site/about">About</a></li>
-            <li><a href="/site/contact">Contact</a></li>
         </ul>
     </div>
 </nav>
